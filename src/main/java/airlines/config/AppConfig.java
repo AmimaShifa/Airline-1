@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 /**
  * Created by winio_000 on 2015-11-02.
  */
-@Configuration
+//@Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"airlines"})
 public class AppConfig extends WebMvcConfigurerAdapter {
