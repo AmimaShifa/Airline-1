@@ -1,6 +1,7 @@
 package airlines.service;
 
 import airlines.model.Client;
+import org.apache.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,6 +14,8 @@ import javax.transaction.Transactional;
 @Named
 @Transactional
 public class ClientServiceImpl implements ClientService {
+
+    private static Logger logger = Logger.getLogger(ClientServiceImpl.class);
 
     @Inject
     private ClientRepository clientRepository;

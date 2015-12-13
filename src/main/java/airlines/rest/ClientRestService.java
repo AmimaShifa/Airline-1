@@ -2,6 +2,7 @@ package airlines.rest;
 
 import airlines.model.Client;
 import airlines.service.ClientService;
+import org.apache.log4j.Logger;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import javax.inject.Inject;
@@ -18,6 +19,8 @@ import java.util.List;
 @Named
 @Path("/clients")
 public class ClientRestService {
+
+    private static Logger logger = Logger.getLogger(ClientRestService.class);
 
     @Inject
     private ClientService clientService;
