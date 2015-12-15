@@ -1,4 +1,4 @@
-package airlines.config;
+package airlines.configuration;
 
 import org.springframework.context.annotation.Configuration;
 

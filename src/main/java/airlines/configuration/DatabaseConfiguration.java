@@ -1,4 +1,4 @@
-package airlines.config;
+package airlines.configuration;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
