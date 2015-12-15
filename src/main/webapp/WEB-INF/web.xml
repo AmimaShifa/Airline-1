@@ -28,7 +28,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>airlines.config.AppConfig</param-value>
+        <param-value>airlines.configuration.MainConfiguration</param-value>
     </context-param>
 
     <listener>
@@ -40,13 +40,23 @@
 
 
     <servlet>
-        <servlet-name>airlines</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <servlet-name>jersey-spring-servlet</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <!-- Register rest packages to auto-scan for rest services-->
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>airlines.rest</param-value>
+        </init-param>
+        <!-- Register JAX-RS Application -->
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>airlines.rest.RestApplication</param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>airlines</servlet-name>
+        <servlet-name>jersey-spring-servlet</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
