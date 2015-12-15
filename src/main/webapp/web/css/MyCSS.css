@@ -1,12 +1,24 @@
-.navigationMenu{
+.navigationMenu {
     text-align: center;
-    margin:25px;
+    margin: 25px;
 }
+
 ul.nav {
-    float:none;
+    float: none;
     display: inline-block;
 }
 
 h1 {
+    text-align: center;
+}
+
+.clientList {
+    width: 80%;
+    margin-left: 200px;
+}
+
+.addClientForm {
+    margin-top: 30px;
+    margin-bottom: 50px;
     text-align: center;
 }

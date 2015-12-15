@@ -39,11 +39,10 @@ app.controller('ClientCtrl', function ($scope, $http) {
         });
     };
 
-
     $scope.deleteClient = function (client) {
         $http({
             method: 'DELETE',
-            url: '/airlines/clients' + client.id
+            url: '/airlines/clients' + '/' + client.id
         }).then(function successCallback(response) {
             $scope.getClients();
         }, function errorCallback() {
