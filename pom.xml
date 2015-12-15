@@ -100,6 +100,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
             <version>${spring.version}</version>
         </dependency>
@@ -310,7 +315,7 @@
                 <!--<update>true</update>-->
                 <!--</configuration>-->
                 <configuration>
-                    <url>http://localhost:8080/airlines</url>
+                    <url>http://localhost:8080/manager/text</url>
                     <username>admin</username>
                     <password>admin</password>
                     <path>/airlines</path>
