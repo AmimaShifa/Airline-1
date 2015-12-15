@@ -5,7 +5,7 @@
     "submenu" : [
       {
         "name" : "Make reservation",
-        "url" : "partials/SummaryPage.html"
+        "url" : "partials/RegisterPage.html"
       },
       {
         "name" : "Hotels",
