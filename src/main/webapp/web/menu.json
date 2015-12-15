@@ -1,0 +1,50 @@
+[
+  {
+    "name" : "Reservations",
+    "withSubmenu": "true",
+    "submenu" : [
+      {
+        "name" : "Make reservation",
+        "url" : "partials/SummaryPage.html"
+      },
+      {
+        "name" : "Hotels",
+        "url" : "partials/SummaryPage.html"
+      }
+    ]
+  },
+  {
+    "name" : "My Flight",
+    "withSubmenu": "true",
+    "submenu" : [
+      {
+        "name" : "My reservation",
+        "url" : "partials/SummaryPage.html"
+      },
+      {
+        "name" : "Flight Status",
+        "url" : "partials/SummaryPage.html"
+      }
+    ]
+  },
+  {
+    "name" : "Offers and discounts",
+    "withSubmenu": "true",
+    "submenu" : [
+      {
+        "name" : "Offers",
+        "withSubmenu" : "true",
+        "sumbenu": [
+          {
+            "name" : "present day offers",
+            "url" : "partials/SummaryPage.html"
+          },
+          {
+            "name" : "for groups",
+            "url" : "partials/SummaryPage.html"
+          }
+        ]
+      }
+    ]
+  }
+]

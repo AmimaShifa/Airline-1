@@ -1,0 +1,16 @@
+<div class="navigationMenu">
+    <ul class="nav nav-pills">
+
+        <li ng-repeat="element in navigationMap" ng-class="{dropdown : element.withSubmenu}">
+            <a href="#" ng-attr-data-toggle="{{ element.withSubmenu ? 'dropdown' : 'notToggle' }}"
+               ng-class="{'dropdown-toggle' : element.withSubmenu}" ng-click="navigateTo(element)">
+                {{element.name}}
+            </a>
+            <ul class="dropdown-menu" ng-if="element.withSubmenu == 'true'">
+                <li ng-repeat="subelement in element.submenu">
+                    <a href="#" ng-click="navigateTo(subelement)">{{subelement.name}}</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
