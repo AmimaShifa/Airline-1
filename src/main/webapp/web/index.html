@@ -2,19 +2,25 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>TEST</title>
+    <title>AIRLINE RESERVATION SYSTEM</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/MyCSS.css"/>
 </head>
-<body ng-app>
-    TEST ANGULARA:
-    2 + 2 = {{2+2}}
-    siema placki
+<body ng-app="mainModule" ng-controller="NavigationCtrl">
 
+<h1>AIRLINE RESERVATION SYSTEM</h1>
 
-    <!-------------------JAVASCRIPT------------------->
-    <script src="js/angular.min.js"></script>
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+<div class="flightMenu">
+    <navigation-bar></navigation-bar>
+</div>
 
-
+<div ng-include="includedPartUrl"></div>
+<!-------------------JAVASCRIPT------------------->
+<script src="js/shared/angular.min.js"></script>
+<script src="js/shared/jquery-1.11.3.min.js"></script>
+<script src="js/shared/bootstrap.min.js"></script>
+<script src="js/mainModule.js"></script>
+<script src="js/controllers/NavigationCtrl.js"></script>
+<script src="js/controllers/ClientsCtrl.js"></script>
 </body>
 </html>

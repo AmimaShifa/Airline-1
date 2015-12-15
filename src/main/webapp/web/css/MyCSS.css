@@ -1,0 +1,12 @@
+.navigationMenu{
+    text-align: center;
+    margin:25px;
+}
+ul.nav {
+    float:none;
+    display: inline-block;
+}
+
+h1 {
+    text-align: center;
+}
