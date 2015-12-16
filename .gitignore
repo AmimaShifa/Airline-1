@@ -3,3 +3,6 @@
 target/
 out/
 build/
+nb-configuration.xml
+context.xml
+nbactions.xml
