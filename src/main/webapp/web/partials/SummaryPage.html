@@ -5,6 +5,8 @@
         <form class="form-horizontal" role="form" ng-show="enableForm">
             <label>First name: </label><input type="text" ng-model="client.firstName">
             <label>Last name: </label><input type="text" ng-model="client.lastName">
+            <label>email: </label><input type="text" ng-model="client.email">
+            <label>password: </label><input type="text" ng-model="client.password">
             <button class="btn btn-default" ng-click="addClient(client)">Submit</button>
         </form>
     </div>
@@ -19,6 +21,11 @@
             </th>
             <th>
                 Client lastname
+            </th><th>
+                Client email
+            </th>
+            <th>
+                Client password
             </th>
         </tr>
         </thead>
@@ -31,6 +38,11 @@
         </td>
         <td>
             {{client.lastName}}
+        </td><td>
+            {{client.email}}
+        </td>
+        <td>
+            {{client.password}}
         </td>
         </tbody>
     </table>
