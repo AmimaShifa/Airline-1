@@ -2,3 +2,16 @@ body {
     background: url('../images/background_plane.png') fixed no-repeat bottom 0 right;
 }
 
+@font-face {
+    font-family: 'former';
+    src: url('../fonts/former.eot');
+    src: local('?'), url('../fonts/former.woff') format('woff'), url('../fonts/former.ttf') format('truetype'), url('../fonts/former.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1 {
+    color: #005faf;
+    font-family: 'former', Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+}
+
