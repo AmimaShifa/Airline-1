@@ -1,16 +1,5 @@
 body {
-}
-
-#watermark {
-    height: 531px;
-    width: 809px;
-    background-image: url('../images/background_plane.png');
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    opacity: 0.4;
-    filter:alpha(opacity=40);
-    z-index: -1000;
+    background: url('../images/background_plane.png') fixed no-repeat bottom 0 right;
 }
 
 @font-face {
