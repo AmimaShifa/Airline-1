@@ -30,7 +30,9 @@ app.controller('ClientCtrl', function ($scope, $http) {
             url: '/airlines/clients',
             data: {
                 "firstName": client.firstName,
-                "lastName": client.lastName
+                "lastName": client.lastName,
+                "email" : client.email,
+                "password" : client.password
             }
         }).then(function successCallback(response) {
             $scope.getClients();

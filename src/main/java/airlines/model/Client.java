@@ -1,7 +1,6 @@
 package airlines.model;
 
 import javax.persistence.*;
-import java.util.Calendar;
 
 /**
  * Created by winio_000 on 2015-12-13.
@@ -21,12 +20,20 @@ public class Client {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
     public Client() {
     }
 
-    public Client(String firstName, String lastName) {
+    public Client(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
+        this.password = password;
     }
 
     public long getId() {
@@ -51,6 +58,22 @@ public class Client {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
