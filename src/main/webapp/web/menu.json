@@ -1,60 +1,60 @@
 [
   {
-    "name" : "Reservations",
+    "name": "Reservations",
     "withSubmenu": "true",
-    "submenu" : [
+    "submenu": [
       {
-        "name" : "Make reservation",
-        "url" : "partials/ReservationPage.html"
+        "name": "Make reservation",
+        "url": "partials/ReservationPage.html"
       },
       {
-        "name" : "Hotels",
-        "url" : "partials/SummaryPage.html"
+        "name": "Hotels",
+        "url": "partials/AdministrationPage.html"
       }
     ]
   },
   {
-    "name" : "My Flight",
+    "name": "My Flight",
     "withSubmenu": "true",
-    "submenu" : [
+    "submenu": [
       {
-        "name" : "My reservation",
-        "url" : "partials/SummaryPage.html"
+        "name": "My reservation",
+        "url": "partials/AdministrationPage.html"
       },
       {
-        "name" : "Flight Status",
-        "url" : "partials/SummaryPage.html"
+        "name": "Flight Status",
+        "url": "partials/AdministrationPage.html"
       }
     ]
   },
   {
-    "name" : "Offers and discounts",
+    "name": "Offers and discounts",
     "withSubmenu": "true",
-    "submenu" : [
+    "submenu": [
       {
-        "name" : "Offers",
-        "withSubmenu" : "true",
+        "name": "Offers",
+        "withSubmenu": "true",
         "sumbenu": [
           {
-            "name" : "present day offers",
-            "url" : "partials/SummaryPage.html"
+            "name": "present day offers",
+            "url": "partials/AdministrationPage.html"
           },
           {
-            "name" : "for groups",
-            "url" : "partials/SummaryPage.html"
+            "name": "for groups",
+            "url": "partials/AdministrationPage.html"
           }
         ]
       }
     ]
   },
   {
-    "name" : "Administration",
+    "name": "Administration",
     "withSubmenu": false,
-    "url" : "partials/SummaryPage.html"
+    "url": "partials/AdministrationPage.html"
   },
   {
-    "name" : "Create Account",
+    "name": "Create Account",
     "withSubmenu": false,
-    "url" : "partials/RegisterPage.html"
+    "url": "partials/RegisterPage.html"
   }
 ]
