@@ -1,13 +1,14 @@
 package airlines.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by winio_000 on 2015-12-13.
  */
 @Entity
 @Table(name = "client")
-public class Client {
+public class Client implements Serializable {
 
     @Id
     @GeneratedValue
@@ -82,6 +83,7 @@ public class Client {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 
