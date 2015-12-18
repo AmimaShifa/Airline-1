@@ -1,0 +1,124 @@
+<div class="administrationFormList" ng-controller="ClientCtrl">
+    <div class="administrationForm">
+        <button ng-click="showForm()" class="btn-link">{{toggleFormTxt}}</button>
+        <form class="form-horizontal" role="form" ng-show="enableForm">
+            <label>First name: </label><input type="text" ng-model="client.firstName">
+            <label>Last name: </label><input type="text" ng-model="client.lastName">
+            <label>email: </label><input type="text" ng-model="client.email">
+            <label>password: </label><input type="text" ng-model="client.password"><br>
+            <button class="btn btn-default" ng-click="addClient(client)">Submit</button>
+        </form>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead ng-if="clients.length > 0">
+        <tr>
+            <th>
+                delete Client
+            </th>
+            <th>
+                Client firstname
+            </th>
+            <th>
+                Client lastname
+            </th>
+            <th>
+                Client email
+            </th>
+            <th>
+                Client password
+            </th>
+        </tr>
+        </thead>
+        <tbody ng-repeat="client in clients">
+        <td>
+            <button ng-click="deleteClient(client)" class="btn-link">[X]</button>
+        </td>
+        <td>
+            {{client.firstName}}
+        </td>
+        <td>
+            {{client.lastName}}
+        </td>
+        <td>
+            {{client.email}}
+        </td>
+        <td>
+            {{client.password}}
+        </td>
+        </tbody>
+    </table>
+</div>
+
+<br><br><br>
+
+<div class="administrationFormList" ng-controller="FlightCtrl">
+    <div class="administrationForm">
+        <button ng-click="showForm()" class="btn-link">{{toggleFormTxt}}</button>
+        <form class="form-horizontal" role="form" ng-show="enableForm">
+            <label>airlineName: </label><input type="text" ng-model="flight.airlineName">
+            <label>departure: </label><input type="text" ng-model="flight.departure">
+            <label>arrival: </label><input type="text" ng-model="flight.arrival">
+            <label>source: </label><input type="text" ng-model="flight.source">
+            <label>destination: </label><input type="text" ng-model="flight.destination">
+            <label>flightPrice: </label><input type="text" ng-model="flight.flightPrice"><br>
+            <label>seats: </label><input type="text" ng-model="flight.seats">
+            <button class="btn btn-default" ng-click="addFlight(flight)">Submit</button>
+        </form>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead ng-if="flights.length > 0">
+        <tr>
+            <th>
+                delete Flight
+            </th>
+            <th>
+                Airline name
+            </th>
+            <th>
+                Departure
+            </th>
+            <th>
+                Arrival
+            </th>
+            <th>
+                Source
+            </th>
+            <th>
+                Destination
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Number of seats
+            </th>
+        </tr>
+        </thead>
+        <tbody ng-repeat="flight in flights">
+        <td>
+            <button ng-click="deleteFlight(flight)" class="btn-link">[X]</button>
+        </td>
+        <td>
+            {{flight.airlineName}}
+        </td>
+        <td>
+            {{flight.departure}}
+        </td>
+        <td>
+            {{flight.arrival}}
+        </td>
+        <td>
+            {{flight.source}}
+        </td>
+        <td>
+            {{flight.destination}}
+        </td>
+        <td>
+            {{flight.flightPrice}}
+        </td>
+        <td>
+            {{flight.seats}}
+        </td>
+        </tbody>
+    </table>
+</div>
