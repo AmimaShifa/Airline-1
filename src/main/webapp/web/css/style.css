@@ -12,12 +12,12 @@ h1 {
     text-align: center;
 }
 
-.clientList {
-    width: 80%;
-    margin-left: 200px;
+.administrationFormList {
+    width: 60%;
+    margin: auto;
 }
 
-.addClientForm {
+.administrationForm {
     margin-top: 30px;
     margin-bottom: 50px;
     text-align: center;
@@ -38,7 +38,7 @@ h1 {
     margin-top: 10px;
 }
 
-.registerContainer .alert-danger{
+.registerContainer .alert-danger {
     text-align: center;
 }
 
@@ -46,7 +46,7 @@ h1 {
     padding: 20px;
     padding-bottom: 40px;
     border-radius: 5px;
-    box-shadow: 0 1px 6px rgba(0,0,0,.3);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .3);
 }
 
 .registerContainer .spacer {
