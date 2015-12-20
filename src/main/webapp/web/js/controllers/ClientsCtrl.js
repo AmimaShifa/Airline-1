@@ -1,7 +1,7 @@
 /**
  * Created by winio_000 on 2015-12-13.
  */
-app.controller('ClientCtrl', function ($scope, $http) {
+app.controller('ClientCtrl', ['$scope', '$http', function ($scope, $http) {
 
     $scope.enableForm = false;
     $ADD_NEW_CLIENT = "Add new client";
@@ -31,8 +31,8 @@ app.controller('ClientCtrl', function ($scope, $http) {
             data: {
                 "firstName": client.firstName,
                 "lastName": client.lastName,
-                "email" : client.email,
-                "password" : client.password
+                "email": client.email,
+                "password": client.password
             }
         }).then(function successCallback(response) {
             $scope.getClients();
@@ -52,5 +52,22 @@ app.controller('ClientCtrl', function ($scope, $http) {
         });
     };
 
+    $scope.updateClient = function (client) {
+        $http({
+            method: 'PUT',
+            url: '/airlines/clients' + '/' + client.id,
+            data: {
+                "firstName": client.firstName,
+                "lastName": client.lastName,
+                "email": client.email,
+                "password": client.password
+            }
+        }).then(function successCallback(response) {
+            $scope.getClients();
+        }, function errorCallback() {
+            console.log('Unable to update client ', client.firstName);
+        });
+    };
+
     $scope.getClients();
-});
+}]);
