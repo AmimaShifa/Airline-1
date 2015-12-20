@@ -9,3 +9,17 @@ app.directive('navigationBar', function() {
         templateUrl: 'partials/NavigationBar.html'
     }
 });
+
+app.directive('clientAddForm', function() {
+   return {
+       restrict: 'E',
+       templateUrl: 'partials/ClientAddForm.html'
+   }
+});
+
+app.directive('flightAddForm', function () {
+   return {
+       restrict: 'E',
+       templateUrl: 'partials/FlightAddForm.html'
+   }
+});

@@ -1,0 +1,61 @@
+<div class="administrationForm">
+    <button ng-click="showForm()" class="btn-link">{{toggleFormTxt}}</button>
+    <form class="form-horizontal" role="form" ng-show="enableForm">
+        <label>First name: </label><input type="text" ng-model="client.firstName">
+        <label>Last name: </label><input type="text" ng-model="client.lastName">
+        <label>email: </label><input type="text" ng-model="client.email">
+        <label>password: </label><input type="text" ng-model="client.password"><br>
+        <button class="btn btn-default" ng-click="addClient(client)">Submit</button>
+    </form>
+</div>
+<table class="table table-striped table-hover">
+    <thead ng-if="clients.length > 0">
+    <tr>
+        <th>
+            Delete client
+        </th>
+        <th>
+            Client firstname
+        </th>
+        <th>
+            Client lastname
+        </th>
+        <th>
+            Client email
+        </th>
+        <th>
+            Client password
+        </th>
+        <th>
+            Update client
+        </th>
+    </tr>
+    </thead>
+    <tbody ng-repeat="client in clients">
+    <td>
+        <button ng-click="deleteClient(client)" class="btn-link">[X]</button>
+    </td>
+    <td>
+        {{client.firstName}}
+    </td>
+    <td>
+        {{client.lastName}}
+    </td>
+    <td>
+        {{client.email}}
+    </td>
+    <td>
+        {{client.password}}
+    </td>
+    <td>
+        <button ng-click="showMe=true" class="btn-link">[EDIT]</button>
+    </td>
+    <form ng-if="showMe==true" class="form-horizontal" role="form" ng-show="enableForm">
+        <input type="text" ng-model="client.firstName">
+        <input type="text" ng-model="client.lastName">
+        <input type="text" ng-model="client.email">
+        <input type="text" ng-model="client.password"><br>
+        <button class="btn btn-default" ng-click="addClient(client)">Submit</button>
+    </form>
+    </tbody>
+</table>
