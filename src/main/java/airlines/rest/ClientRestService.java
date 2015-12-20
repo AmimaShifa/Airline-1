@@ -59,11 +59,21 @@ public class ClientRestService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createClient(Client client) {
         try {
+            if (client.getId() != null)
+                return Response.status(Response.Status.BAD_REQUEST).entity("Specifying ID in POST forbidden!! Live it blank").build();
             clientService.save(client);
         } catch (DataIntegrityViolationException e) {
             return Response.status(Response.Status.NOT_FOUND).entity("Client with this PESEL/EMAIL  already exists").build();
         }
         return Response.status(200).entity("Client created").build();
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Response updateClient(@PathParam("id") long id, Client client) {
+        clientService.update(id, client);
+        return Response.status(200).entity("Client updated").build();
     }
 
     public void setClientService(ClientService clientService) {

@@ -18,4 +18,6 @@ public interface ClientService {
     Iterable<Client> findAll();
 
     Client findOne(long id);
+
+    void update(Long id, Client client);
 }

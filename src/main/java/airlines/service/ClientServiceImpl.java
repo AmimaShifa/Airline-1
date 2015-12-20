@@ -50,6 +50,12 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.findOne(id);
     }
 
+    @Override
+    public void update(Long id, Client client) {
+        client.setId(id);
+        clientRepository.save(client);
+    }
+
     public void setClientRepository(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
