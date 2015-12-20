@@ -1,19 +1,16 @@
 package airlines.model;
 
-import airlines.service.ClientServiceImpl;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 /**
  * Created by winio_000 on 2015-12-13.
  */
 @Entity
 @Table(name = "flight")
+@XmlRootElement
 public class Flight implements Serializable {
 
     @Id

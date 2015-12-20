@@ -1,6 +1,7 @@
 package airlines.model;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
@@ -8,12 +9,13 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "client")
+@XmlRootElement
 public class Client implements Serializable {
 
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -37,11 +39,11 @@ public class Client implements Serializable {
         this.password = password;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
