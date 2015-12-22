@@ -5,10 +5,12 @@
     "submenu": [
       {
         "name": "Make reservation",
+        "withSubmenu": "false",
         "url": "partials/ReservationPage.html"
       },
       {
         "name": "Hotels",
+        "withSubmenu": "false",
         "url": "partials/AdministrationPage.html"
       }
     ]
@@ -19,10 +21,12 @@
     "submenu": [
       {
         "name": "My reservation",
+        "withSubmenu": "false",
         "url": "partials/AdministrationPage.html"
       },
       {
         "name": "Flight Status",
+        "withSubmenu": "false",
         "url": "partials/AdministrationPage.html"
       }
     ]
@@ -37,10 +41,12 @@
         "sumbenu": [
           {
             "name": "present day offers",
+            "withSubmenu": "false",
             "url": "partials/AdministrationPage.html"
           },
           {
             "name": "for groups",
+            "withSubmenu": "false",
             "url": "partials/AdministrationPage.html"
           }
         ]
@@ -49,12 +55,12 @@
   },
   {
     "name": "Administration",
-    "withSubmenu": false,
+    "withSubmenu": "false",
     "url": "partials/AdministrationPage.html"
   },
   {
     "name": "Create Account",
-    "withSubmenu": false,
+    "withSubmenu": "false",
     "url": "partials/RegisterPage.html"
   }
 ]
