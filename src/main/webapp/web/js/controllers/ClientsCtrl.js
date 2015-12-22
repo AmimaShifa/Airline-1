@@ -7,7 +7,9 @@ app.controller('ClientCtrl', ['$scope', '$http', function ($scope, $http) {
     $ADD_NEW_CLIENT = "Add new client";
     $HIDE_FORM = "Hide form";
     $scope.toggleFormTxt = $ADD_NEW_CLIENT;
+    $scope.clients = {};
 
+    /////////////CRUD FUNCTIONS////////////////////////
     $scope.getClients = function () {
         $http({
             method: 'GET',
@@ -31,8 +33,8 @@ app.controller('ClientCtrl', ['$scope', '$http', function ($scope, $http) {
             data: {
                 "firstName": client.firstName,
                 "lastName": client.lastName,
-                "email": client.email,
-                "password": client.password
+                "email" : client.email,
+                "password" : client.password
             }
         }).then(function successCallback(response) {
             $scope.getClients();
@@ -52,15 +54,15 @@ app.controller('ClientCtrl', ['$scope', '$http', function ($scope, $http) {
         });
     };
 
-    $scope.updateClient = function (client) {
+    $scope.updateClient = function(client) {
         $http({
             method: 'PUT',
             url: '/airlines/clients' + '/' + client.id,
             data: {
                 "firstName": client.firstName,
                 "lastName": client.lastName,
-                "email": client.email,
-                "password": client.password
+                "email" : client.email,
+                "password" : client.password
             }
         }).then(function successCallback(response) {
             $scope.getClients();
@@ -70,4 +72,27 @@ app.controller('ClientCtrl', ['$scope', '$http', function ($scope, $http) {
     };
 
     $scope.getClients();
+
+    /////////////EDITING CLIENT///////////////////////
+    $scope.selected = {};
+
+    // gets the template to ng-include for a table row / item
+    $scope.getTemplate = function (client) {
+        if (client.id === $scope.selected.id) return 'edit';
+        else return 'display';
+    };
+
+    $scope.editClient = function (client) {
+        $scope.selected = angular.copy(client);
+    };
+
+    $scope.saveClient = function () {
+        $scope.updateClient($scope.selected);
+        $scope.reset();
+    };
+
+    $scope.reset = function () {
+        $scope.selected = {};
+    };
+
 }]);
