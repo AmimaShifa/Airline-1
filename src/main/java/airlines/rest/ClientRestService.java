@@ -3,6 +3,7 @@ package airlines.rest;
 import airlines.model.Client;
 import airlines.service.ClientService;
 import org.apache.log4j.Logger;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import javax.inject.Inject;
@@ -45,14 +46,24 @@ public class ClientRestService {
     @DELETE
     @Path("{id}")
     public Response deleteClient(@PathParam("id") long id) {
-        clientService.delete(id);
-        return Response.status(200).entity("Client deleted").build();
+        try {
+            clientService.delete(id);
+            return Response.status(200).entity("Client deleted").build();
+        } catch (DataAccessException de) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Could not delete client for id : " + id + ", such client not found")
+                    .build();
+        }
     }
 
     @DELETE
     public Response deleteAllClients() {
-        clientService.deleteAll();
-        return Response.status(200).entity("All clients deleted").build();
+        try {
+            clientService.deleteAll();
+            return Response.status(200).entity("All clients deleted").build();
+        } catch (DataAccessException de) {
+            return Response.status(Response.Status.NOT_FOUND).entity("There is no client to delete").build();
+        }
     }
 
     @POST
