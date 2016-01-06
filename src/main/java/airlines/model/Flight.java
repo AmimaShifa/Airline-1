@@ -16,7 +16,7 @@ public class Flight implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "airlineName", nullable = false)
     private String airlineName;
@@ -41,6 +41,10 @@ public class Flight implements Serializable {
     @Column(name = "seats", nullable = false)
     private Integer seats;
 
+    @JoinColumn(name = "reservationId")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Reservation reservation;
+
     public Flight() {
     }
 
@@ -54,11 +58,11 @@ public class Flight implements Serializable {
         this.seats = seats;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -116,6 +120,14 @@ public class Flight implements Serializable {
 
     public void setSeats(Integer seats) {
         this.seats = seats;
+    }
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 
     @Override
