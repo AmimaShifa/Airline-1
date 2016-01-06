@@ -9,8 +9,8 @@ ul.nav {
 }
 
 .administrationFormList {
-    width: 60%;
-    margin: auto;
+    width: 85%;
+    margin: 0px auto;
 }
 
 .administrationForm {
@@ -29,9 +29,9 @@ ul.nav {
 }
 
 .registerContainer .container {
-    max-width: 400px;
-    max-height: 100px;
-    margin-top: 10px;
+    width: 20vw;
+    height: 15vh;
+    margin: 100px auto;
 }
 
 .registerContainer .alert-danger {
@@ -40,9 +40,8 @@ ul.nav {
 
 .registerContainer .signup-screen {
     padding: 20px;
-    padding-bottom: 40px;
     border-radius: 5px;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, .3);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
 }
 
 .registerContainer .spacer {
@@ -50,7 +49,8 @@ ul.nav {
 }
 
 body {
-    background: url('../images/background_plane.png') fixed no-repeat bottom 0 right;
+    background: url('../images/background_plane.png') fixed no-repeat bottom 0 right, linear-gradient(to right, rgba(229, 249, 255, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(229, 249, 255, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e5f9ff', endColorstr='#e5f9ff', GradientType=1);
 }
 
 @font-face {
@@ -61,18 +61,30 @@ body {
     font-style: normal;
 }
 
+.content {
+    background-color: white;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    height: 80vh;
+    width: 50vw;
+    border: 1px solid #eee;
+}
+
 h1 {
     text-align: center;
     color: #005faf;
     font-family: 'former', Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
 }
 
-.form-fields-separator {
+fieldset {
+    margin: 0px auto;
+}
+
+.separator {
     border: 0px solid #e3e3e3;
     border-bottom-width: 1px;
-    margin-bottom: 15px;
-    margin-left: 200px;
-    padding-bottom: 15px;
 }
 
 .form-control {
@@ -110,6 +122,15 @@ label {
 h3 {
     color: #005faf;
     font-family: Arial, sans-serif;
-    margin-left: 25%;
-    margin-bottom: 25px;
+    margin-left: 200px;
+    padding: 10px;
+}
+
+.form-horizontal {
+    margin-left: 100px;
+}
+
+hr  {
+    width: 70%;
+    margin-left: 50px;
 }
