@@ -8,10 +8,6 @@ ul.nav {
     display: inline-block;
 }
 
-h1 {
-    text-align: center;
-}
-
 .administrationFormList {
     width: 60%;
     margin: auto;
@@ -66,7 +62,54 @@ body {
 }
 
 h1 {
+    text-align: center;
     color: #005faf;
     font-family: 'former', Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
 }
 
+.form-fields-separator {
+    border: 0px solid #e3e3e3;
+    border-bottom-width: 1px;
+    margin-bottom: 15px;
+    margin-left: 200px;
+    padding-bottom: 15px;
+}
+
+.form-control {
+    background-color: rgba(0, 84, 116, 0.1);
+    color: #262f35;
+}
+
+label {
+    font-family: sans-serif;
+    color: #262f35;
+}
+
+.styled-button-8 {
+    background: #25A6E1;
+    background: -moz-linear-gradient(top, #25A6E1 0%, #188BC0 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #25A6E1), color-stop(100%, #188BC0));
+    background: -webkit-linear-gradient(top, #25A6E1 0%, #188BC0 100%);
+    background: -o-linear-gradient(top, #25A6E1 0%, #188BC0 100%);
+    background: -ms-linear-gradient(top, #25A6E1 0%, #188BC0 100%);
+    background: linear-gradient(top, #25A6E1 0%, #188BC0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#25A6E1', endColorstr='#188BC0', GradientType=0);
+    padding: 8px 13px;
+    color: #fff;
+    opacity: 0.8;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 17px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border: 1px solid #1A87B9;
+    float: none;
+    margin-left: 60%;
+}
+
+h3 {
+    color: #005faf;
+    font-family: Arial, sans-serif;
+    margin-left: 25%;
+    margin-bottom: 25px;
+}
