@@ -20,12 +20,14 @@ ul.nav {
 }
 
 .registerContainer h1 {
-    color: black;
+    color: #005faf;
     font-family: 'Roboto';
     text-transform: uppercase;
     font-weight: 900;
     font-size: 35px;
     text-align: center;
+    margin: 0 auto;
+    padding-top: 5%;
 }
 
 .registerContainer .container {
@@ -36,16 +38,35 @@ ul.nav {
 
 .registerContainer .alert-danger {
     text-align: center;
+    margin: 0 auto;
+    margin-top: 3px;
+    width: 80%;
+    padding: 5px;
 }
 
 .registerContainer .signup-screen {
-    padding: 20px;
+    padding: 0;
     border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, .2);
+    border: 1px solid #eee;
+    margin: 0 auto;
+    padding-bottom: 10px;
 }
 
 .registerContainer .spacer {
     margin-top: 10px;
+}
+
+.spacer button {
+    width: 30%;
+    text-shadow: #134364;
+    font-size: large;
+}
+
+.page-header {
+    margin: 0 auto;
+    padding: 0;
+    border: none;
 }
 
 body {
@@ -61,12 +82,13 @@ body {
     font-style: normal;
 }
 
+
 .content {
     background-color: white;
-    left:0;
-    right:0;
-    margin-left:auto;
-    margin-right:auto;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
     height: 80vh;
     width: 50vw;
     border: 1px solid #eee;
@@ -90,6 +112,28 @@ fieldset {
 .form-control {
     background-color: rgba(0, 84, 116, 0.1);
     color: #262f35;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 15px;
+    /*margin: 10px 0px 10px 0px;*/
+    /*padding: 10px;*/
+}
+
+.form-control .danger {
+    width: 80%;
+    padding: 10px;
+    /*height: inherit;*/
+}
+
+.form-register label {
+    font-size: medium;
+    margin: 0 auto;
+    margin-left: 20px;
+}
+
+.input-field .alert {
+    width: 80%;
+    padding: 5px;
 }
 
 label {
@@ -130,7 +174,7 @@ h3 {
     margin-left: 100px;
 }
 
-hr  {
+hr {
     width: 70%;
     margin-left: 50px;
 }
