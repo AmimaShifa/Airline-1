@@ -1,4 +1,4 @@
-<div class="container" ng-controller="ReservationCtrl">
+<div class="container" ng-controller="ReservationCtrl"><!--ReservationCtrl -->
     <h3>Return ticket</h3>
 
     <form role="form" class="form-horizontal">
@@ -8,11 +8,11 @@
 
             <div class="form-group">
                 <div class="col-sm-3">
-                    <select class="form-control">
-                        <option value="0">Kraków</option>
-                        <option value="1">Warszawa</option>
-                        <option value="2">Poznań</option>
-                        <option value="3">Gdańsk</option>
+                    <select class="form-control" ng-model="flight.source">
+                        <option>Kraków</option>
+                        <option>Warszawa</option>
+                        <option>Poznań</option>
+                        <option>Gdańsk</option>
                     </select>
                 </div>
             </div>
@@ -22,11 +22,11 @@
 
             <div class="form-group">
                 <div class="col-sm-3">
-                    <select class="form-control" required="required">
-                        <option value="0">Oslo</option>
-                        <option value="1">Londyn</option>
-                        <option value="2">Paryż</option>
-                        <option value="3">Berlin</option>
+                    <select class="form-control" ng-model="flight.destination">
+                        <option>Oslo</option>
+                        <option>Londyn</option>
+                        <option>Paryż</option>
+                        <option>Berlin</option>
                     </select>
                 </div>
             </div>
@@ -36,21 +36,20 @@
 
             <div class="form-group">
                 <div class="col-sm-3">
-                    <input ng-model="departureDate" type="text" value=""
-                           class="form-control" datepicker-popup="dd-MM-yyyy" datepickerOptions="dateOptions"
-                           is-open="false" ng-click="data.isOpen = true" data-ng-required="true">
+                    <input ng-model="flight.departure" type="text"
+                           class="form-control" datepicker-popup="yyyy-MM-dd" datepickerOptions="dateOptions"
+                           is-open="false" ng-click="data.isOpen = true" data-ng-required="true" READONLY>
                 </div>
             </div>
         </fieldset>
         <fieldset>
-            <hr align="center">
             <label class="col-sm-3 control-label">Arrival:</label>
 
             <div class="form-group">
                 <div class="col-sm-3">
-                    <input ng-model="arrivalDate" type="text"
-                           class="form-control" datepicker-popup="dd-MM-yyyy"
-                           is-open="false" ng-click="data.isOpen = true">
+                    <input ng-model="flight.arrival" type="text"
+                           class="form-control" datepicker-popup="yyyy-MM-dd"
+                           is-open="false" ng-click="data.isOpen = true" READONLY>
                 </div>
             </div>
         </fieldset>
@@ -115,7 +114,7 @@
                 </div>
             </div>
         </fieldset>
-        <hr >
+        <hr>
         <fieldset>
             <label class="col-sm-3 control-label">Class</label>
 
@@ -129,7 +128,8 @@
                 </div>
             </div>
         </fieldset>
-        <input type="submit" class="styled-button-8" value="Submit"/>
+        <input type="submit" class="styled-button-8" value="Submit" ng-click="getWantedFlight(flight)"/>
+        <!--getWantedFlight(flight)-->
     </form>
 
 </div>
