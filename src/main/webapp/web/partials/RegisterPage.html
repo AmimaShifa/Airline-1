@@ -9,26 +9,24 @@
 
                 <form class="form-register" method="post" name="register" novalidate>
                     <div class="input-field col s6">
-                        <input value="dupa" id="first-name" ng-model="client.firstName" type="text"
-                               placeholder="First name"
+                        <input id="first-name" ng-model="client.firstName" type="text" placeholder="First name"
                                class="validate form-control"
                                required>
                     </div>
                     <div class="input-field col s6">
-                        <input value="dupa" id="last-name" ng-model="client.lastName" type="text"
-                               placeholder="Last name"
+                        <input id="last-name" ng-model="client.lastName" type="text" placeholder="Last name"
                                class="validate form-control"
                                required>
                     </div>
                     <div class="input-field col s6">
-                        <input value="dupa" id="email" ng-model="client.email" type="email" name="email"
+                        <input id="email" ng-model="client.email" type="email" name="email"
                                placeholder="Email" class="validate form-control" required>
                     </div>
                     <p class="alert alert-danger" ng-show="form-register.email.$error.email">Your email is
                         invalid.</p>
 
                     <div class="input-field col s6">
-                        <input value="dupa" id="password" ng-model="client.password" type="password" name="password"
+                        <input id="password" ng-model="client.password" type="password" name="password"
                                ng-minlength='6'
                                placeholder="Password" class="validate form-control" required>
                     </div>
