@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import java.util.Calendar;
 
 /**
  * Created by winio_000 on 2016-01-06.
@@ -43,8 +42,8 @@ public class DefaultModelInitializer {
     private void addDefaultFlightModel() {
         Flight flight = new Flight();
         flight.setAirlineName("DefaultAirlineName");
-        flight.setArrival(Calendar.getInstance());
-        flight.setDeparture(Calendar.getInstance());
+        flight.setArrival("2016-01-07");
+        flight.setDeparture("2016-01-07");
         flight.setDestination("DefaultDestination");
         flight.setSource("DefaultSorce");
         flight.setSeats(150);
