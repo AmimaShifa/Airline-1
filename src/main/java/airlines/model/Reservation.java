@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -23,6 +24,12 @@ public class Reservation {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "reservation")
     private List<Flight> flights;
+
+    @Column(name = "passengers", nullable = true)
+    private HashMap<Integer, Integer> passengers;
+
+    @Column(name = "class", nullable = true)
+    private String flightClass;
 
     public Reservation() {
     }
@@ -48,6 +55,22 @@ public class Reservation {
             LOGGER.error("Reservation already has this flight ! : " + flight);
         else
             flights.add(flight);
+    }
+
+    public HashMap<Integer, Integer> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(HashMap<Integer, Integer> passengers) {
+        this.passengers = passengers;
+    }
+
+    public String getFlightClass() {
+        return flightClass;
+    }
+
+    public void setFlightClass(String flightClass) {
+        this.flightClass = flightClass;
     }
 }
 
