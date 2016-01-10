@@ -1,9 +1,13 @@
 package airlines.model;
 
+import airlines.business.date.DateFormatter;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.crypto.Data;
 import java.io.Serializable;
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 /**
  * Created by winio_000 on 2015-12-13.
@@ -21,13 +25,13 @@ public class Flight implements Serializable {
     @Column(name = "airlineName", nullable = false)
     private String airlineName;
 
+    @NotNull
     @Column(name = "departure", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Calendar departure;
+    private String departure;
 
+    @NotNull
     @Column(name = "arrival", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Calendar arrival;
+    private String arrival;
 
     @Column(name = "source", nullable = false)
     private String source;
@@ -48,7 +52,7 @@ public class Flight implements Serializable {
     public Flight() {
     }
 
-    public Flight(String airlineName, Calendar departure, Calendar arrival, String source, String destination, Double flightPrice, Integer seats) {
+    public Flight(String airlineName, String departure, String arrival, String source, String destination, Double flightPrice, Integer seats) {
         this.airlineName = airlineName;
         this.departure = departure;
         this.arrival = arrival;
@@ -74,19 +78,19 @@ public class Flight implements Serializable {
         this.airlineName = airlineName;
     }
 
-    public Calendar getDeparture() {
+    public String getDeparture() {
         return departure;
     }
 
-    public void setDeparture(Calendar departure) {
+    public void setDeparture(String departure) {
         this.departure = departure;
     }
 
-    public Calendar getArrival() {
+    public String getArrival() {
         return arrival;
     }
 
-    public void setArrival(Calendar arrival) {
+    public void setArrival(String arrival) {
         this.arrival = arrival;
     }
 
