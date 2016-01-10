@@ -115,14 +115,11 @@ fieldset {
     width: 80%;
     margin: 0 auto;
     margin-top: 15px;
-    /*margin: 10px 0px 10px 0px;*/
-    /*padding: 10px;*/
 }
 
 .form-control .danger {
     width: 80%;
     padding: 10px;
-    /*height: inherit;*/
 }
 
 .form-register label {
@@ -168,10 +165,6 @@ h3 {
     font-family: Arial, sans-serif;
     margin-left: 200px;
     padding: 10px;
-}
-
-.form-horizontal {
-    margin-left: 100px;
 }
 
 hr {
