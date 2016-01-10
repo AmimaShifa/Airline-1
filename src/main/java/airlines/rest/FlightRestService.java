@@ -40,8 +40,10 @@ public class FlightRestService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Flight> getAllFlights() {
-        return (List<Flight>) flightService.findAll();
+    public List<Flight> getAllFlights(@QueryParam("source") String source, @QueryParam("destination") String destination,
+                                      @QueryParam("arrival") String arrival, @QueryParam("departure") String departure) {
+
+        return (List<Flight>) flightService.findAll(source,destination,arrival,departure);
     }
 
     @DELETE
