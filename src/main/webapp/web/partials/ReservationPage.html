@@ -1,4 +1,4 @@
-<div class="container" ng-controller="ReservationCtrl"><!--ReservationCtrl -->
+<div class="container" ng-controller="ReservationCtrl">
     <h3>Return ticket</h3>
 
     <form role="form" class="form-horizontal">
@@ -8,7 +8,7 @@
 
             <div class="form-group">
                 <div class="col-sm-3">
-                    <select class="form-control" ng-model="flight.source">
+                    <select ng-model="flight.source" class="validate form-control" ng-minlength='1'>
                         <option>Kraków</option>
                         <option>Warszawa</option>
                         <option>Poznań</option>
@@ -22,7 +22,7 @@
 
             <div class="form-group">
                 <div class="col-sm-3">
-                    <select class="form-control" ng-model="flight.destination">
+                    <select ng-model="flight.destination" class="validate form-control" required>
                         <option>Oslo</option>
                         <option>Londyn</option>
                         <option>Paryż</option>
@@ -36,9 +36,10 @@
 
             <div class="form-group">
                 <div class="col-sm-3">
-                    <input ng-model="flight.departure" type="text"
-                           class="form-control" datepicker-popup="yyyy-MM-dd" datepickerOptions="dateOptions"
-                           is-open="false" ng-click="data.isOpen = true" data-ng-required="true" READONLY>
+                    <input ng-model="departureDate" type="text"
+                           datepicker-popup="yyyy-MM-dd" datepickerOptions="dateOptions"
+                           is-open="false" ng-click="data.isOpen = true"
+                           class="validate form-control" READONLY required>
                 </div>
             </div>
         </fieldset>
@@ -47,9 +48,10 @@
 
             <div class="form-group">
                 <div class="col-sm-3">
-                    <input ng-model="flight.arrival" type="text"
-                           class="form-control" datepicker-popup="yyyy-MM-dd"
-                           is-open="false" ng-click="data.isOpen = true" READONLY>
+                    <input ng-model="arrivalDate" type="text" value="arrivalDate"
+                           datepicker-popup="yyyy-MM-dd" is-open="false"
+                           ng-click="data.isOpen = true" class="validate form-control"
+                           READONLY required>
                 </div>
             </div>
         </fieldset>
@@ -59,12 +61,12 @@
 
             <div class="form-group">
                 <div class="col-sm-3">
-                    <select class="form-control" required="required">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                    <select class="validate form-control" required>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
                     </select>
                 </div>
             </div>
@@ -74,12 +76,12 @@
 
             <div class="form-group">
                 <div class="col-sm-3">
-                    <select class="form-control" required="required">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                    <select class="validate form-control">
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
                     </select>
                 </div>
             </div>
@@ -89,12 +91,12 @@
 
             <div class="form-group">
                 <div class="col-sm-3">
-                    <select class="form-control" required="required">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                    <select class="form-control">
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
                     </select>
                 </div>
             </div>
@@ -104,12 +106,12 @@
 
             <div class="form-group">
                 <div class="col-sm-3">
-                    <select class="form-control" required="required">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                    <select class="form-control">
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
                     </select>
                 </div>
             </div>
@@ -120,16 +122,17 @@
 
             <div class="form-group">
                 <div class="col-sm-3">
-                    <select class="form-control" required="required">
-                        <option value="0">Economy class</option>
-                        <option value="1">Premium Class</option>
-                        <option value="2">Business</option>
+                    <select class="form-control" ng-minlength='6'>
+                        <option>Economy class</option>
+                        <option>Premium Class</option>
+                        <option>Business</option>
                     </select>
                 </div>
             </div>
         </fieldset>
-        <input type="submit" class="styled-button-8" value="Submit" ng-click="getWantedFlight(flight)"/>
-        <!--getWantedFlight(flight)-->
+        <input type="submit" class="styled-button-8" value="Submit"
+               ng-disabled="form-horizontal.$invalid"
+               ng-click="getFlights(flight.source,flight.destination,arrivalDate,departureDate)"
+        />
     </form>
-
 </div>
