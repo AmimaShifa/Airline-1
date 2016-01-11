@@ -8,10 +8,21 @@ app.controller('FlightCtrl', function ($scope, $http) {
     $HIDE_FORM = "Hide form";
     $scope.toggleFormTxt = $ADD_NEW_FLIGHT;
 
+    $scope.getFlghtsUsingQueryParams = function (_source_, _destination_, _arrival_, _departure_) {
+        $scope.parameters = {
+            source: _source_,
+            destination: _destination_,
+            arrival: _arrival_,
+            departure: _departure_
+        };
+        $scope.getFlights();
+    };
+
     $scope.getFlights = function () {
         $http({
             method: 'GET',
-            url: '/airlines/flights'
+            url: '/airlines/flights',
+            params: $scope.parameters
         }).then(function successCallback(response) {
             $scope.flights = response.data;
         }, function errorCallback() {
@@ -49,6 +60,7 @@ app.controller('FlightCtrl', function ($scope, $http) {
             console.log('Unable to delete flight ');
         });
     };
+
 
     $scope.showForm = function () {
         $scope.enableForm = !$scope.enableForm;
