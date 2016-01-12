@@ -49,6 +49,16 @@ public class DefaultModelInitializer {
         flight.setSeats(150);
         flight.setFlightPrice(159.99);
 
+        Flight flight2 = new Flight();
+        flight2.setAirlineName("DefaultAirlineName2");
+        flight2.setArrival("2016-01-07");
+        flight2.setDeparture("2016-01-07");
+        flight2.setDestination("Oslo");
+        flight2.setSource("Kraków");
+        flight2.setSeats(200);
+        flight2.setFlightPrice(139.99);
+
         flightRestService.createFLight(flight);
+        flightRestService.createFLight(flight2);
     }
 }
