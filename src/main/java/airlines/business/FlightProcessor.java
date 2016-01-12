@@ -1,14 +1,12 @@
 package airlines.business;
 
+import airlines.business.date.DateFormatter;
 import airlines.model.Flight;
 import airlines.model.FlightInfo;
 
 import javax.inject.Named;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,53 +17,67 @@ import java.util.stream.Collectors;
 @Named
 public class FlightProcessor {
 
-    private List<Flight> paginatedFligts = new ArrayList<>();
+    private List<Flight> paginatedFlights = new ArrayList<>();
 
     public List<Flight> findWantedFlights(Iterable<Flight> allFlights, FlightInfo flightInfo) {
-        paginatedFligts = (List<Flight>) allFlights;
+        checkMethodParamaters(allFlights, flightInfo);
+        processQueryParameters(flightInfo);
 
-        if (paginatedFligts.isEmpty()) {
-            return Collections.emptyList();
-        }
-
-        if (isFlightInfoEmpty(flightInfo))
-            return (List<Flight>) allFlights;
-
-        processFlightInfoCredentials(flightInfo);
-
-        return paginatedFligts;
-
+        return paginatedFlights;
     }
 
-    private void processFlightInfoCredentials(FlightInfo flightInfo) {
-        List<Method> flightInfoMethods1 = getFlightInfoGetters(flightInfo);
+    private void checkMethodParamaters(Iterable<Flight> allFlights, FlightInfo flightInfo) {
+        if (Arrays.asList(allFlights).isEmpty())
+            paginatedFlights = Collections.emptyList();
+        else
+            paginatedFlights = (List<Flight>) allFlights;
+    }
 
-        if (flightInfo.getSource() != null) {
-            paginatedFligts = paginatedFligts
-                    .stream()
-                    .filter(flight -> flight.getSource().equals(flightInfo.getSource()))
-                    .collect(Collectors.toList());
-        }
+    private void processQueryParameters(FlightInfo flightInfo) {
+        processSourceParam(flightInfo);
+        processArrivalParam(flightInfo);
+        processDepartureParam(flightInfo);
+        processDestinationParam(flightInfo);
+    }
 
+    private void processDestinationParam(FlightInfo flightInfo) {
         if (flightInfo.getDestination() != null) {
-            paginatedFligts = paginatedFligts
+            paginatedFlights = paginatedFlights
                     .stream()
+                    .filter(flight -> flight.getDestination() != null)
                     .filter(flight -> flight.getDestination().equals(flightInfo.getDestination()))
                     .collect(Collectors.toList());
         }
     }
 
-    private List<Method> getFlightInfoGetters(FlightInfo flightInfo) {
-        List<Method> flightInfoMethods = new ArrayList<>();
-        try {
-            for (PropertyDescriptor propertyDescriptor :
-                    Introspector.getBeanInfo(flightInfo.getClass(), Object.class).getPropertyDescriptors()) {
-                flightInfoMethods.add(propertyDescriptor.getReadMethod());
-            }
-        } catch (IntrospectionException e) {
-            e.printStackTrace();
+    private void processDepartureParam(FlightInfo flightInfo) {
+        if (flightInfo.getDeparture() != null) {
+            paginatedFlights = paginatedFlights
+                    .stream()
+                    .filter(flight -> flight.getDeparture() != null)
+                    .filter(flight -> DateFormatter.trimDate(flight.getDeparture()).equals(DateFormatter.trimDate(flightInfo.getDeparture())))
+                    .collect(Collectors.toList());
         }
-        return flightInfoMethods;
+    }
+
+    private void processArrivalParam(FlightInfo flightInfo) {
+        if (flightInfo.getArrival() != null) {
+            paginatedFlights = paginatedFlights
+                    .stream()
+                    .filter(flight -> flight.getArrival() != null)
+                    .filter(flight -> DateFormatter.trimDate(flight.getArrival()).equals(DateFormatter.trimDate(flightInfo.getArrival())))
+                    .collect(Collectors.toList());
+        }
+    }
+
+    private void processSourceParam(FlightInfo flightInfo) {
+        if (flightInfo.getSource() != null) {
+            paginatedFlights = paginatedFlights
+                    .stream()
+                    .filter(flight -> flight.getSource() != null)
+                    .filter(flight -> flight.getSource().equals(flightInfo.getSource()))
+                    .collect(Collectors.toList());
+        }
     }
 
     private boolean isFlightInfoEmpty(FlightInfo flightInfo) {
@@ -74,5 +86,4 @@ public class FlightProcessor {
                 && flightInfo.getSource() == null
                 && flightInfo.getDestination() == null;
     }
-
 }
