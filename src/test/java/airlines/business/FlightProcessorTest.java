@@ -68,7 +68,6 @@ public class FlightProcessorTest {
         assertEquals(resultFlights.size(), 0);
     }
 
-
     @Test
     public void shouldReturnOneFlightWhenSourceAndDestinationMatches() {
         setUpFlightList(5);
@@ -77,6 +76,44 @@ public class FlightProcessorTest {
 
         assertEquals(resultFlights.size(), 1);
         assertEquals(resultFlights.get(0), flights.get(4));
+    }
+
+    @Test
+    public void shouldReturnTwoDifferentFlightsWhenSourceAndDestinationMathcesBoth() {
+        List<Flight> flights = new ArrayList<>();
+
+        flights.add(new Flight("aaa", "sadasd", "notNull", "source111", "destination111", 123.99, 88));
+        flights.add(new Flight("difftaaa", "diffbbb", "notNull", "source111", "destination111", 499.12, 144));
+        flights.add(createFlight(1));
+        flights.add(createFlight(2));
+        flights.add(createFlight(3));
+
+        List<Flight> resultFlights =
+                flightProcessor
+                        .findWantedFlights(flights, new FlightInfo(null, "source111", "destination111", null));
+
+        assertEquals(2, resultFlights.size());
+        assertEquals(flights.get(0), resultFlights.get(0));
+        assertEquals(flights.get(1), resultFlights.get(1));
+    }
+
+    @Test
+    public void shouldReturnFlightWhenAllParametersMatches() {
+        List<Flight> flights = new ArrayList<>();
+
+        flights.add(new Flight("aaa", "ddd", "aaa", "source111", "destination111", 99.99, 99));
+        flights.add(new Flight("difftaaa", "ddd", "aaa", "source111", "destination111", 399.12, 12));
+        flights.add(createFlight(1));
+        flights.add(createFlight(2));
+        flights.add(createFlight(3));
+
+        List<Flight> resultFlights =
+                flightProcessor
+                        .findWantedFlights(flights, new FlightInfo("aaa", "source111", "destination111", "ddd"));
+
+        assertEquals(2, resultFlights.size());
+        assertEquals(flights.get(0), resultFlights.get(0));
+        assertEquals(flights.get(1), resultFlights.get(1));
     }
 
     private void setUpFlightList(int i) {
