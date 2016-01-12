@@ -147,4 +147,35 @@ public class Flight implements Serializable {
                 ", seats=" + seats +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Flight flight = (Flight) o;
+
+        if (airlineName != null ? !airlineName.equals(flight.airlineName) : flight.airlineName != null) return false;
+        if (departure != null ? !departure.equals(flight.departure) : flight.departure != null) return false;
+        if (arrival != null ? !arrival.equals(flight.arrival) : flight.arrival != null) return false;
+        if (source != null ? !source.equals(flight.source) : flight.source != null) return false;
+        if (destination != null ? !destination.equals(flight.destination) : flight.destination != null) return false;
+        if (flightPrice != null ? !flightPrice.equals(flight.flightPrice) : flight.flightPrice != null) return false;
+        if (seats != null ? !seats.equals(flight.seats) : flight.seats != null) return false;
+        return !(reservation != null ? !reservation.equals(flight.reservation) : flight.reservation != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = airlineName != null ? airlineName.hashCode() : 0;
+        result = 31 * result + (departure != null ? departure.hashCode() : 0);
+        result = 31 * result + (arrival != null ? arrival.hashCode() : 0);
+        result = 31 * result + (source != null ? source.hashCode() : 0);
+        result = 31 * result + (destination != null ? destination.hashCode() : 0);
+        result = 31 * result + (flightPrice != null ? flightPrice.hashCode() : 0);
+        result = 31 * result + (seats != null ? seats.hashCode() : 0);
+        result = 31 * result + (reservation != null ? reservation.hashCode() : 0);
+        return result;
+    }
 }
