@@ -101,15 +101,15 @@ public class FlightProcessorTest {
     public void shouldReturnFlightWhenAllParametersMatches() {
         List<Flight> flights = new ArrayList<>();
 
-        flights.add(new Flight("aaa", "ddd", "aaa", "source111", "destination111", 99.99, 99));
-        flights.add(new Flight("difftaaa", "ddd", "aaa", "source111", "destination111", 399.12, 12));
+        flights.add(new Flight("aaa", "2016-06-02", "2016-05-06", "source111", "destination111", 99.99, 99));
+        flights.add(new Flight("difftaaa", "2016-06-02", "2016-05-06", "source111", "destination111", 399.12, 12));
         flights.add(createFlight(1));
         flights.add(createFlight(2));
         flights.add(createFlight(3));
 
         List<Flight> resultFlights =
                 flightProcessor
-                        .findWantedFlights(flights, new FlightInfo("aaa", "source111", "destination111", "ddd"));
+                        .findWantedFlights(flights, new FlightInfo("2016-05-06", "source111", "destination111", "2016-06-02"));
 
         assertEquals(2, resultFlights.size());
         assertEquals(flights.get(0), resultFlights.get(0));
