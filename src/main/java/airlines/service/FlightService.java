@@ -20,6 +20,4 @@ public interface FlightService {
     Iterable<Flight> findAll(String source, String destination, String arrival, String departure);
 
     Flight findOne(long id);
-
-    List<Flight> findWantedFlights(Flight flight);
 }

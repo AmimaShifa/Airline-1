@@ -1,7 +1,8 @@
 package airlines.service;
 
-import airlines.business.FlightComparator;
+import airlines.business.FlightProcessor;
 import airlines.model.Flight;
+import airlines.model.FlightInfo;
 import org.apache.log4j.Logger;
 
 import javax.inject.Inject;
@@ -21,6 +22,9 @@ public class FlightServiceImpl implements FlightService {
     @Inject
     private FlightRepository flightRepository;
 
+    @Inject
+    private FlightProcessor flightProcessor;
+
     @Override
     public void deleteAll() {
         flightRepository.deleteAll();
@@ -38,18 +42,15 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public void save(Flight flight) {
-//        flight.setDeparture(DateFormatter.formatDate(flight.getDeparture()).toString());
-//        flight.setArrival(DateFormatter.formatDate(flight.getArrival()).toString());
         flightRepository.save(flight);
     }
 
     @Override
     public Iterable<Flight> findAll(String source, String destination, String arrival, String departure) {
-        System.out.println("source : "+ source);
-        System.out.println("destination : "+ destination);
-        System.out.println("arrival : "+ arrival);
-        System.out.println("departure : "+ departure);
-        return flightRepository.findAll();
+        FlightInfo flightInfo = new FlightInfo(source,destination,arrival,departure);
+        List<Flight> paginatedFlights = flightProcessor.findWantedFlights(flightRepository.findAll(), flightInfo);
+
+        return paginatedFlights;
     }
 
     @Override
@@ -57,12 +58,6 @@ public class FlightServiceImpl implements FlightService {
         return flightRepository.findOne(id);
     }
 
-    @Override
-    public List<Flight> findWantedFlights(Flight flight) {
-        List<Flight> foundFlights = FlightComparator.findWantedFlights(flight, flightRepository.findAll());
-
-        return foundFlights;
-    }
 
     public void setFlightRepository(FlightRepository flightRepository) {
         this.flightRepository = flightRepository;
