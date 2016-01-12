@@ -47,7 +47,7 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public Iterable<Flight> findAll(String source, String destination, String arrival, String departure) {
-        FlightInfo flightInfo = new FlightInfo(source,destination,arrival,departure);
+        FlightInfo flightInfo = new FlightInfo(arrival, source, destination, departure);
         List<Flight> paginatedFlights = flightProcessor.findWantedFlights(flightRepository.findAll(), flightInfo);
 
         return paginatedFlights;
@@ -57,7 +57,6 @@ public class FlightServiceImpl implements FlightService {
     public Flight findOne(long id) {
         return flightRepository.findOne(id);
     }
-
 
     public void setFlightRepository(FlightRepository flightRepository) {
         this.flightRepository = flightRepository;
