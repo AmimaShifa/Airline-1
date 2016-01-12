@@ -10,7 +10,7 @@ public class DateFormatter {
     private static final String DATE_PATTERN_YYYY_MM_dd = "yyyyMMdd";
     private static DateTimeFormatter dateTimeFormatter;
 
-    public static LocalDate formatDate(String date) {
+    public static LocalDate formatStringToLocaleDate(String date) {
         LocalDate localDate;
         if (date == null)
             localDate = LocalDate.now();
@@ -22,6 +22,11 @@ public class DateFormatter {
         localDate = LocalDate.parse(date, dateTimeFormatter);
 
         return localDate;
+    }
+
+    public static String trimDate(String date) {
+        LocalDate localDate = formatStringToLocaleDate(date);
+        return localDate.toString();
     }
 
 }
