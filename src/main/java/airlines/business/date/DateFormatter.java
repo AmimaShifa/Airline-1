@@ -8,16 +8,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class DateFormatter {
     private static final String DATE_PATTERN_YYYY_MM_dd = "yyyyMMdd";
-    private static DateTimeFormatter dateTimeFormatter;
 
     public static LocalDate formatStringToLocaleDate(String date) {
         LocalDate localDate;
         if (date == null)
             localDate = LocalDate.now();
-
         date = date.split("T")[0];
         date = date.replaceAll("-", "");
-        dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN_YYYY_MM_dd);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN_YYYY_MM_dd);
 
         localDate = LocalDate.parse(date, dateTimeFormatter);
 
@@ -25,8 +23,15 @@ public class DateFormatter {
     }
 
     public static String trimDate(String date) {
-        LocalDate localDate = formatStringToLocaleDate(date);
-        return localDate.toString();
-    }
+        String resultDate = "";
+        if (date.length() < 11)
+            resultDate = date;
+        else if (date.charAt(10) == 'T') {
+            resultDate = date.split("T")[0];
+        } else if (date.charAt(10) == ' ') {
+            resultDate = date.split(" ")[0];
+        } else resultDate = LocalDate.now().toString();
 
+        return resultDate;
+    }
 }
