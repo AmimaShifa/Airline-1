@@ -1,12 +1,13 @@
 /**
  * Created by winio_000 on 2015-12-16.
  */
-app.controller('FlightCtrl', function ($scope, $http) {
+app.controller('FlightCtrl', ['$scope', '$http', function ($scope, $http) {
 
     $scope.enableForm = false;
     $ADD_NEW_FLIGHT = "Add new flight";
     $HIDE_FORM = "Hide form";
     $scope.toggleFormTxt = $ADD_NEW_FLIGHT;
+    $scope.controllerName = 'FlightCtrl';
 
     $scope.getFlghtsUsingQueryParams = function (_source_, _destination_, _arrival_, _departure_) {
         $scope.parameters = {
@@ -68,4 +69,4 @@ app.controller('FlightCtrl', function ($scope, $http) {
     };
 
     $scope.getFlights();
-});
+}]);
