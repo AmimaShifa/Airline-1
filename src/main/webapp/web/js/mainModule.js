@@ -23,3 +23,17 @@ app.directive('flightAddForm', function () {
         templateUrl: 'partials/FlightAddForm.html'
     }
 });
+
+app.directive('clientsTable', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/ClientsTableTemplate.html'
+    }
+});
+
+app.directive('flightsTable', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/FlightsTableTemplate.html'
+    }
+});
