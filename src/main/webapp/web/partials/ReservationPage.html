@@ -1,8 +1,13 @@
 <div class="container" ng-controller="ReservationCtrl" ng-style="containerStyle">
-    <h3>Return ticket</h3>
-
     <div class="reservationContainer" ng-style="reservationContainerStyle">
+
         <div class="reservationForm">
+            <div ng-style="flightType">
+                <input type="button" class="styled-button-8" value="One way Ticket"
+                       ng-click="setOneWayFlight()"/>
+                <input type="button" class="styled-button-8" value="Return Ticket"
+                       ng-click="setReturnFlight()"/>
+            </div>
             <form role="form" class="form-horizontal" ng-style="formHorizontalStyle">
                 <hr>
                 <fieldset>
@@ -45,7 +50,7 @@
                         </div>
                     </div>
                 </fieldset>
-                <fieldset>
+                <fieldset ng-if="isReturnFlight">
                     <label class="col-sm-{{labelColumnSize}} control-label">Arrival:</label>
 
                     <div class="form-group">
@@ -132,13 +137,13 @@
                         </div>
                     </div>
                 </fieldset>
-                <input type="submit" class="styled-button-8" value="Submit"
+                <input type="submit" ng-style="reservationSubmit" class="styled-button-8" value="Submit"
                        ng-disabled="form-horizontal.$invalid"
                        ng-click="getFlights(flight.source,flight.destination,arrivalDate,departureDate)"
                 />
             </form>
         </div>
-        <div class="reservationResult" ng-style="{{reservationResultStyle}}">
+        <div class="reservationResult" ng-style="reservationResultStyle">
             <flights-table></flights-table>
         </div>
     </div>
