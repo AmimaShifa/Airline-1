@@ -1,141 +1,145 @@
-<div class="container" ng-controller="ReservationCtrl">
+<div class="container" ng-controller="ReservationCtrl" ng-style="containerStyle">
     <h3>Return ticket</h3>
 
-    <form role="form" class="form-horizontal">
-        <hr>
-        <fieldset>
-            <label class="col-sm-3 control-label">Source:</label>
+    <div class="reservationContainer" ng-style="reservationContainerStyle">
+        <div class="reservationForm">
+            <form role="form" class="form-horizontal" ng-style="formHorizontalStyle">
+                <hr>
+                <fieldset>
+                    <label class="col-sm-{{labelColumnSize}} control-label">Source:</label>
 
-            <div class="form-group">
-                <div class="col-sm-3">
-                    <select ng-model="flight.source" class="validate form-control" ng-minlength='1'>
-                        <option>Kraków</option>
-                        <option>Warszawa</option>
-                        <option>Poznań</option>
-                        <option>Gdańsk</option>
-                    </select>
-                </div>
-            </div>
-        </fieldset>
-        <fieldset>
-            <label class="col-sm-3 control-label">Destination:</label>
+                    <div class="form-group">
+                        <div class="col-sm-{{selectColumnSize}}">
+                            <select ng-model="flight.source" class="validate form-control" ng-minlength='1'>
+                                <option>Kraków</option>
+                                <option>Warszawa</option>
+                                <option>Poznań</option>
+                                <option>Gdańsk</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <label class="col-sm-{{labelColumnSize}} control-label">Destination:</label>
 
-            <div class="form-group">
-                <div class="col-sm-3">
-                    <select ng-model="flight.destination" class="validate form-control" required>
-                        <option>Oslo</option>
-                        <option>Londyn</option>
-                        <option>Paryż</option>
-                        <option>Berlin</option>
-                    </select>
-                </div>
-            </div>
-        </fieldset>
-        <fieldset>
-            <label class="col-sm-3 control-label">Departure:</label>
+                    <div class="form-group">
+                        <div class="col-sm-{{selectColumnSize}}">
+                            <select ng-model="flight.destination" class="validate form-control" required>
+                                <option>Oslo</option>
+                                <option>Londyn</option>
+                                <option>Paryż</option>
+                                <option>Berlin</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <label class="col-sm-{{labelColumnSize}} control-label">Departure:</label>
 
-            <div class="form-group">
-                <div class="col-sm-3">
-                    <input ng-model="departureDate" type="text"
-                           datepicker-popup="yyyy-MM-dd" datepickerOptions="dateOptions"
-                           is-open="false" ng-click="data.isOpen = true"
-                           class="validate form-control" READONLY required>
-                </div>
-            </div>
-        </fieldset>
-        <fieldset>
-            <label class="col-sm-3 control-label">Arrival:</label>
+                    <div class="form-group">
+                        <div class="col-sm-{{selectColumnSize}}">
+                            <input ng-model="departureDate" type="text"
+                                   datepicker-popup="yyyy-MM-dd" datepickerOptions="dateOptions"
+                                   is-open="false" ng-click="data.isOpen = true"
+                                   class="validate form-control" READONLY required>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <label class="col-sm-{{labelColumnSize}} control-label">Arrival:</label>
 
-            <div class="form-group">
-                <div class="col-sm-3">
-                    <input ng-model="arrivalDate" type="text" value="arrivalDate"
-                           datepicker-popup="yyyy-MM-dd" is-open="false"
-                           ng-click="data.isOpen = true" class="validate form-control"
-                           READONLY required>
-                </div>
-            </div>
-        </fieldset>
-        <hr>
-        <fieldset>
-            <label class="col-sm-3 control-label">< 2 years</label>
+                    <div class="form-group">
+                        <div class="col-sm-{{selectColumnSize}}">
+                            <input ng-model="arrivalDate" type="text" value="arrivalDate"
+                                   datepicker-popup="yyyy-MM-dd" is-open="false"
+                                   ng-click="data.isOpen = true" class="validate form-control"
+                                   READONLY required>
+                        </div>
+                    </div>
+                </fieldset>
+                <hr>
+                <fieldset>
+                    <label class="col-sm-{{labelColumnSize}} control-label">< 2 years</label>
 
-            <div class="form-group">
-                <div class="col-sm-3">
-                    <select class="validate form-control" required>
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                </div>
-            </div>
-        </fieldset>
-        <fieldset>
-            <label class="col-sm-3 control-label">2 - 18 years</label>
+                    <div class="form-group">
+                        <div class="col-sm-{{selectColumnSize}}">
+                            <select class="validate form-control" required>
+                                <option>0</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <label class="col-sm-{{labelColumnSize}} control-label">2 - 18 years</label>
 
-            <div class="form-group">
-                <div class="col-sm-3">
-                    <select class="validate form-control">
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                </div>
-            </div>
-        </fieldset>
-        <fieldset>
-            <label class="col-sm-3 control-label">18 - 60 years</label>
+                    <div class="form-group">
+                        <div class="col-sm-{{selectColumnSize}}">
+                            <select class="validate form-control">
+                                <option>0</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <label class="col-sm-{{labelColumnSize}} control-label">18 - 60 years</label>
 
-            <div class="form-group">
-                <div class="col-sm-3">
-                    <select class="form-control">
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                </div>
-            </div>
-        </fieldset>
-        <fieldset>
-            <label class="col-sm-3 control-label">> 60 years</label>
+                    <div class="form-group">
+                        <div class="col-sm-{{selectColumnSize}}">
+                            <select class="form-control">
+                                <option>0</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <label class="col-sm-{{labelColumnSize}} control-label">> 60 years</label>
 
-            <div class="form-group">
-                <div class="col-sm-3">
-                    <select class="form-control">
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                </div>
-            </div>
-        </fieldset>
-        <hr>
-        <fieldset>
-            <label class="col-sm-3 control-label">Class</label>
+                    <div class="form-group">
+                        <div class="col-sm-{{selectColumnSize}}">
+                            <select class="form-control">
+                                <option>0</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <hr>
+                <fieldset>
+                    <label class="col-sm-{{labelColumnSize}} control-label">Class</label>
 
-            <div class="form-group">
-                <div class="col-sm-3">
-                    <select class="form-control" ng-minlength='6'>
-                        <option>Economy class</option>
-                        <option>Premium Class</option>
-                        <option>Business</option>
-                    </select>
-                </div>
-            </div>
-        </fieldset>
-        <input type="submit" class="styled-button-8" value="Submit"
-               ng-disabled="form-horizontal.$invalid"
-               ng-click="getFlights(flight.source,flight.destination,arrivalDate,departureDate)"
-        />
-    </form>
-    <div class="administrationFormList">
-        <flights-table></flights-table>
+                    <div class="form-group">
+                        <div class="col-sm-{{selectColumnSize}}">
+                            <select class="form-control" ng-minlength='6'>
+                                <option>Economy class</option>
+                                <option>Premium Class</option>
+                                <option>Business</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <input type="submit" class="styled-button-8" value="Submit"
+                       ng-disabled="form-horizontal.$invalid"
+                       ng-click="getFlights(flight.source,flight.destination,arrivalDate,departureDate)"
+                />
+            </form>
+        </div>
+        <div class="reservationResult" ng-style="{{reservationResultStyle}}">
+            <flights-table></flights-table>
+        </div>
     </div>
 </div>
