@@ -2,14 +2,9 @@
  * Created by winio_000 on 2015-12-15.
  */
 app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', '$timeout', function ($scope, $http, $filter, $controller, $timeout) {
-    $scope.departureDate = $filter('date')(new Date(), 'yyyy-MM-dd');
-    $scope.arrivalDate = $filter('date')(new Date(new Date().getTime() + (3 * 60 * 60 * 24 * 1000)), 'yyyy-MM-dd');
-    $scope.controllerName = 'ReservationCtrl';
-    $scope.labelColumnSize = 3;
-    $scope.selectColumnSize = 3;
 
-    //MAKE RESERVATION
-    $scope.makeReservation = function (clientId) {
+    /////////////CRUD FUNCTIONS////////////////////////
+    $scope.addReservation = function (fl) {
         $http({
             method: 'POST',
             url: '/airlines/reservations',
@@ -23,13 +18,41 @@ app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', 
 
     var flightControllerScope = $scope.$new();
     $controller('FlightCtrl', {$scope: flightControllerScope});
-
     $scope.getFlights = function (source, destination, arrival, departure) {
+
         flightControllerScope.getFlghtsUsingQueryParams(source, destination, arrival, departure);
         //TODO replace this with promises!!!!
         $timeout(function () {
             setProcessedFlights();
         }, 100);
+    };
+
+    $scope.setOneWayFlight = function () {
+        $scope.isReturnFlight = false;
+    };
+
+    $scope.setReturnFlight = function () {
+        $scope.isReturnFlight = true;
+    };
+
+    $scope.chooseFlight = function (flight) {
+        if (confirm('Are you sure you want to reserve this flight?' +
+                '\nsource : ' + flight.source +
+                '\ndestination : ' + flight.destination +
+                '\ndeparture : ' + flight.arrival +
+                '\narrival : ' + flight.arrival + '')) {
+            $scope.addReservation(flight);
+        } else {
+            console.log("DUPA");
+        }
+    };
+
+    $scope.hoverIn = function () {
+        $scope.hoverReservationButton = true;
+    };
+
+    $scope.hoverOut = function () {
+        $scope.hoverReservationButton = false;
     };
 
     var setProcessedFlights = function () {
@@ -41,6 +64,14 @@ app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', 
             $scope.reservationResultStyle = {};
             $scope.formHorizontalStyle = {};
             $scope.containerStyle = {};
+            $scope.containerStyle = {
+                'padding-left': '0px'
+            };
+            $scope.flightType = {
+                'margin-left': '20%',
+                'margin-top': '25px'
+            };
+
         } else {
             $scope.labelColumnSize = 4;
             $scope.selectColumnSize = 7;
@@ -56,12 +87,35 @@ app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', 
             };
 
             $scope.formHorizontalStyle = {
-                'min-width': "400px"
+                'min-width': "300"
             };
 
             $scope.containerStyle = {
-                'padding-left': "0px"
+                'padding-left': '0px'
             };
+            $scope.flightType = {
+                'margin-left': '10%',
+                'margin-top': '25px'
+            };
+
         }
     };
+
+    (function () {
+        $scope.departureDate = $filter('date')(new Date(), 'yyyy-MM-dd');
+        $scope.arrivalDate = $filter('date')(new Date(new Date().getTime() + (3 * 60 * 60 * 24 * 1000)), 'yyyy-MM-dd');
+        $scope.controllerName = 'ReservationCtrl';
+        $scope.labelColumnSize = 3;
+        $scope.selectColumnSize = 3;
+        $scope.reservationSubmit = {
+            'margin-left': "40%"
+        };
+        $scope.containerStyle = {
+            'padding-left': '0px'
+        };
+        $scope.flightType = {
+            'margin-left': '20%',
+            'margin-top': '25px'
+        };
+    })();
 }]);
