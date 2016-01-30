@@ -3,12 +3,6 @@
  */
 app.controller('ClientCtrl', ['$scope', '$http', function ($scope, $http) {
 
-    $scope.enableForm = false;
-    $ADD_NEW_CLIENT = "Add new client";
-    $HIDE_FORM = "Hide form";
-    $scope.toggleFormTxt = $ADD_NEW_CLIENT;
-    $scope.clients = {};
-
     /////////////CRUD FUNCTIONS////////////////////////
     $scope.getClients = function () {
         $http({
@@ -21,11 +15,6 @@ app.controller('ClientCtrl', ['$scope', '$http', function ($scope, $http) {
         });
     };
 
-    $scope.showForm = function () {
-        $scope.enableForm = !$scope.enableForm;
-        $scope.toggleFormTxt = $scope.enableForm ? $HIDE_FORM : $ADD_NEW_CLIENT;
-    };
-
     $scope.addClient = function (client) {
         $http({
             method: 'POST',
@@ -33,8 +22,8 @@ app.controller('ClientCtrl', ['$scope', '$http', function ($scope, $http) {
             data: {
                 "firstName": client.firstName,
                 "lastName": client.lastName,
-                "email" : client.email,
-                "password" : client.password
+                "email": client.email,
+                "password": client.password
             }
         }).then(function successCallback(response) {
             $scope.getClients();
@@ -54,15 +43,15 @@ app.controller('ClientCtrl', ['$scope', '$http', function ($scope, $http) {
         });
     };
 
-    $scope.updateClient = function(client) {
+    $scope.updateClient = function (client) {
         $http({
             method: 'PUT',
             url: '/airlines/clients' + '/' + client.id,
             data: {
                 "firstName": client.firstName,
                 "lastName": client.lastName,
-                "email" : client.email,
-                "password" : client.password
+                "email": client.email,
+                "password": client.password
             }
         }).then(function successCallback(response) {
             $scope.getClients();
@@ -70,8 +59,6 @@ app.controller('ClientCtrl', ['$scope', '$http', function ($scope, $http) {
             console.log('Unable to update client ', client.firstName);
         });
     };
-
-    $scope.getClients();
 
     /////////////EDITING CLIENT///////////////////////
     $scope.selected = {};
@@ -94,5 +81,20 @@ app.controller('ClientCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.reset = function () {
         $scope.selected = {};
     };
+
+    //ON INITIALIZE
+    (function () {
+        $scope.enableForm = false;
+        $ADD_NEW_CLIENT = "Add new client";
+        $HIDE_FORM = "Hide form";
+        $scope.toggleFormTxt = $ADD_NEW_CLIENT;
+        $scope.clients = {};
+
+        $scope.showForm = function () {
+            $scope.enableForm = !$scope.enableForm;
+            $scope.toggleFormTxt = $scope.enableForm ? $HIDE_FORM : $ADD_NEW_CLIENT;
+        };
+        $scope.getClients();
+    })();
 
 }]);
