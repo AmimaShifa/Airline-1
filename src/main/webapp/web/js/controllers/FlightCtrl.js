@@ -3,22 +3,7 @@
  */
 app.controller('FlightCtrl', ['$scope', '$http', function ($scope, $http) {
 
-    $scope.enableForm = false;
-    $ADD_NEW_FLIGHT = "Add new flight";
-    $HIDE_FORM = "Hide form";
-    $scope.toggleFormTxt = $ADD_NEW_FLIGHT;
-    $scope.controllerName = 'FlightCtrl';
-
-    $scope.getFlghtsUsingQueryParams = function (_source_, _destination_, _arrival_, _departure_) {
-        $scope.parameters = {
-            source: _source_,
-            destination: _destination_,
-            arrival: _arrival_,
-            departure: _departure_
-        };
-        $scope.getFlights();
-    };
-
+    /////////////CRUD FUNCTIONS////////////////////////
     $scope.getFlights = function () {
         $http({
             method: 'GET',
@@ -62,11 +47,30 @@ app.controller('FlightCtrl', ['$scope', '$http', function ($scope, $http) {
         });
     };
 
-
-    $scope.showForm = function () {
-        $scope.enableForm = !$scope.enableForm;
-        $scope.toggleFormTxt = $scope.enableForm ? $HIDE_FORM : $ADD_NEW_FLIGHT;
+    $scope.getFlghtsUsingQueryParams = function (_source_, _destination_, _arrival_, _departure_) {
+        $scope.parameters = {
+            source: _source_,
+            destination: _destination_,
+            arrival: _arrival_,
+            departure: _departure_
+        };
+        $scope.getFlights();
     };
 
-    $scope.getFlights();
+    //ON INITIALIZE
+    (function () {
+        $scope.enableForm = false;
+        $ADD_NEW_FLIGHT = "Add new flight";
+        $HIDE_FORM = "Hide form";
+        $scope.toggleFormTxt = $ADD_NEW_FLIGHT;
+        $scope.controllerName = 'FlightCtrl';
+
+        $scope.showForm = function () {
+            $scope.enableForm = !$scope.enableForm;
+            $scope.toggleFormTxt = $scope.enableForm ? $HIDE_FORM : $ADD_NEW_FLIGHT;
+        };
+
+        $scope.getFlights();
+    })();
+
 }]);
