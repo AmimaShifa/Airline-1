@@ -113,7 +113,6 @@ public class FlightProcessorTest {
         flights.add(createFlightFrom("source1234", "destination1", "2016-01-02 15:45", "2016-01-02 16:20"));
         flights.add(createFlightFrom("source4567", "destination2", "2016-01-02 09:30", "2016-01-02 15:50"));
         flights.add(createFlightFrom("source7890", "destination3", "2017-09-09 00:30", "2017-09-09 05:30"));
-
         ReservationInfo reservationInfo = createReservationFrom(null, null, "2016-01-02", "2016-01-02");
 
         List<Flight> processedFlights = flightProcessor.findWantedFlights(flights, reservationInfo);
@@ -121,6 +120,19 @@ public class FlightProcessorTest {
         assertEquals(2, processedFlights.size());
         assertEquals(flights.get(0), processedFlights.get(0));
         assertEquals(flights.get(1), processedFlights.get(1));
+    }
+
+    @Test
+    public void shouldReturnOnlyOneFlightWithAllProperParams() throws Exception {
+        flights.add(createFlightFrom("source1", "destination1", "2015-05-07 12:30", "2015-05-07 15:30"));
+        flights.add(createFlightFrom("source2", "destination2", "2015-06-17 17:30", "2015-06-07 19:30"));
+        flights.add(createFlightFrom("source3", "destination3", "2015-07-27 20:30", "2015-07-27 23:30"));
+        ReservationInfo reservationInfo = createReservationFrom("source1", "destination1", "2015-05-07", "2015-05-07");
+
+        List<Flight> processedFlights = flightProcessor.findWantedFlights(flights, reservationInfo);
+
+        assertEquals(1, processedFlights.size());
+        assertEquals(flights.get(0), processedFlights.get(0));
     }
 
     private ReservationInfo createReservationFrom(String source, String destination, String departure, String arrival) {
