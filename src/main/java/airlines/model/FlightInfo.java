@@ -6,15 +6,13 @@ package airlines.model;
 public class FlightInfo {
     private String source;
     private String destination;
-    private String arrival;
     private String departure;
 
     public FlightInfo() {
 
     }
 
-    public FlightInfo(String arrival, String source, String destination, String departure) {
-        this.arrival = arrival;
+    public FlightInfo(String source, String destination, String departure) {
         this.source = source;
         this.destination = destination;
         this.departure = departure;
@@ -36,14 +34,6 @@ public class FlightInfo {
         this.destination = destination;
     }
 
-    public String getArrival() {
-        return arrival;
-    }
-
-    public void setArrival(String arrival) {
-        this.arrival = arrival;
-    }
-
     public String getDeparture() {
         return departure;
     }
@@ -57,7 +47,6 @@ public class FlightInfo {
         return "FlightInfo{" +
                 "source='" + source + '\'' +
                 ", destination='" + destination + '\'' +
-                ", arrival='" + arrival + '\'' +
                 ", departure='" + departure + '\'' +
                 '}';
     }

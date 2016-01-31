@@ -1,7 +1,6 @@
 package airlines.business;
 
 
-import airlines.model.Flight;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -44,4 +43,15 @@ public class DateFormatterTest {
 
         assertEquals("2016-01-07", trimmedDate);
     }
+
+    @Test
+    public void shouldIncrementDepartureAndArrivalByOneDay() throws Exception {
+        String departure = "2016-01-07";
+        String arrival = "2016-01-14";
+
+        assertEquals(DateFormatter.addOneDayDueToTimeZoneMissMach(departure), "2016-01-08");
+        assertEquals(DateFormatter.addOneDayDueToTimeZoneMissMach(arrival), "2016-01-15");
+    }
+
+
 }

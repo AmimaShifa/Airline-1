@@ -34,4 +34,13 @@ public class DateFormatter {
 
         return resultDate;
     }
+
+    public static String addOneDayDueToTimeZoneMissMach(String date) {
+        if (date != null && date != "") {
+            LocalDate localDate = formatStringToLocaleDate(date);
+            localDate = localDate.plusDays(1);
+            return localDate.toString();
+        }
+        return null;
+    }
 }
