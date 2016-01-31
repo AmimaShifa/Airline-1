@@ -34,15 +34,16 @@ public class FlightProcessor {
         String wantedDestination = reservationInfo.getDestination();
         String wantedDeparture = reservationInfo.getDeparture();
         String wantedArrival = reservationInfo.getArrival();
+        paginatedFlights = storedFlights;
 
         if (wantedSource != null) {
-            paginatedFlights = storedFlights
+            paginatedFlights = paginatedFlights
                     .stream()
                     .filter(flight -> flight.getSource().equals(wantedSource))
                     .collect(Collectors.toList());
         }
         if (wantedDestination != null) {
-            paginatedFlights = storedFlights
+            paginatedFlights = paginatedFlights
                     .stream()
                     .filter(flight -> (wantedDestination != null) && (flight.getDestination().equals(wantedDestination)))
                     .collect(Collectors.toList());
@@ -50,14 +51,14 @@ public class FlightProcessor {
 
 
         if (wantedDeparture != null) {
-            paginatedFlights = storedFlights
+            paginatedFlights = paginatedFlights
                     .stream()
                     .filter(flight -> (wantedDeparture != null) && hasSameDeparture(flight, wantedDeparture))
                     .collect(Collectors.toList());
         }
 
         if (wantedArrival != null) {
-            paginatedFlights = storedFlights
+            paginatedFlights = paginatedFlights
                     .stream()
                     .filter(flight -> (wantedArrival != null) && hasSameArrival(flight, wantedArrival))
                     .collect(Collectors.toList());
