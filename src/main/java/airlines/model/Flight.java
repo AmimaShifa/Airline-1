@@ -1,13 +1,9 @@
 package airlines.model;
 
-import airlines.business.date.DateFormatter;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.crypto.Data;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * Created by winio_000 on 2015-12-13.
