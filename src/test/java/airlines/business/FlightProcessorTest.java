@@ -1,7 +1,7 @@
 package airlines.business;
 
 import airlines.model.Flight;
-import airlines.model.FlightInfo;
+import airlines.model.ReservationInfo;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,109 +17,132 @@ public class FlightProcessorTest {
 
     private List<Flight> flights;
     private FlightProcessor flightProcessor;
+    private ReservationInfo reservationInfo;
 
     @Before
     public void setUp() {
         flights = new ArrayList<>();
         flightProcessor = new FlightProcessor();
+        reservationInfo = new ReservationInfo();
     }
 
     @Test
-    public void shouldReturnTrueWhenEquatingTwoFlightsWithTheSameFields() {
-        Flight flight1 = new Flight("1", "1", "1", "1", "1", 1.0, 1);
-        Flight flight2 = new Flight("1", "1", "1", "1", "1", 1.0, 1);
+    public void shouldReturnEmptyListWhenNoFlightsIndDB() throws Exception {
+        List<Flight> processedFlights = flightProcessor.findWantedFlights(flights, reservationInfo);
 
-        assertEquals(flight1, flight2);
-    }
-
-    //equals() and hashcode() test for flight model
-    @Test
-    public void shouldReturnAllFlightsWhenFlightInfoIsEmpty() {
-        setUpFlightList(3);
-
-        List<Flight> resultFlights = flightProcessor.findWantedFlights(flights, new FlightInfo(null, null, null, null));
-
-        assertEquals(flights, resultFlights);
+        assertEquals(0, processedFlights.size());
     }
 
     @Test
-    public void shouldReturnOnlyOneFlightWithGivenSource() {
-        setUpFlightList(3);
-
-        List<Flight> resultFlights = flightProcessor.findWantedFlights(flights, new FlightInfo(null, "source1", null, null));
-
-        assertEquals(resultFlights.size(), 1);
-        assertEquals(resultFlights.get(0), flights.get(1));
-    }
-
-    @Test
-    public void shouldReturnEmptyListWhenZeroFlightsGiven() {
-        List<Flight> wantedFlights = flightProcessor.findWantedFlights(new ArrayList<>(), new FlightInfo(null, "source1", null, null));
-
-        assertEquals(0, wantedFlights.size());
-    }
-
-    @Test
-    public void shouldNotReturnAnyFlightNonOfTheFlightsMatchesTwoParameters() {
-        setUpFlightList(5);
-
-        List<Flight> resultFlights = flightProcessor.findWantedFlights(flights, new FlightInfo(null, "source4", "destination3", null));
-
-        assertEquals(resultFlights.size(), 0);
-    }
-
-    @Test
-    public void shouldReturnOneFlightWhenSourceAndDestinationMatches() {
-        setUpFlightList(5);
-
-        List<Flight> resultFlights = flightProcessor.findWantedFlights(flights, new FlightInfo(null, "source4", "destination4", null));
-
-        assertEquals(resultFlights.size(), 1);
-        assertEquals(resultFlights.get(0), flights.get(4));
-    }
-
-    @Test
-    public void shouldReturnTwoDifferentFlightsWhenSourceAndDestinationMathcesBoth() {
-        List<Flight> flights = new ArrayList<>();
-
-        flights.add(new Flight("aaa", "sadasd", "notNull", "source111", "destination111", 123.99, 88));
-        flights.add(new Flight("difftaaa", "diffbbb", "notNull", "source111", "destination111", 499.12, 144));
+    public void shouldReturnAllStoredFlightsWhenNoQueryParams() throws Exception {
         flights.add(createFlight(1));
         flights.add(createFlight(2));
-        flights.add(createFlight(3));
 
-        List<Flight> resultFlights =
-                flightProcessor
-                        .findWantedFlights(flights, new FlightInfo(null, "source111", "destination111", null));
+        List<Flight> processedFlights = flightProcessor.findWantedFlights(flights, reservationInfo);
 
-        assertEquals(2, resultFlights.size());
-        assertEquals(flights.get(0), resultFlights.get(0));
-        assertEquals(flights.get(1), resultFlights.get(1));
+        assertEquals(flights, processedFlights);
     }
 
     @Test
-    public void shouldReturnFlightWhenAllParametersMatches() {
-        List<Flight> flights = new ArrayList<>();
+    public void shouldReturnTwoFlightsWithEqualOnlySource() throws Exception {
+        flights.add(createFlightFrom("source1", "destination1", "2016-01-02 15:45", "2016-01-02 16:20"));
+        flights.add(createFlightFrom("source1", "destination2", "2016-01-02 09:30", "2016-01-02 15:50"));
+        flights.add(createFlightFrom("source2", "destination3", "2017-09-09 00:30", "2017-09-09 05:30"));
+        ReservationInfo reservationInfo = createReservationFrom("source1", null, null, null);
 
-        flights.add(new Flight("aaa", "2016-06-02", "2016-05-06", "source111", "destination111", 99.99, 99));
-        flights.add(new Flight("difftaaa", "2016-06-02", "2016-05-06", "source111", "destination111", 399.12, 12));
-        flights.add(createFlight(1));
-        flights.add(createFlight(2));
-        flights.add(createFlight(3));
+        List<Flight> processedFlights = flightProcessor.findWantedFlights(flights, reservationInfo);
 
-        List<Flight> resultFlights =
-                flightProcessor
-                        .findWantedFlights(flights, new FlightInfo("2016-05-06", "source111", "destination111", "2016-06-02"));
-
-        assertEquals(2, resultFlights.size());
-        assertEquals(flights.get(0), resultFlights.get(0));
-        assertEquals(flights.get(1), resultFlights.get(1));
+        assertEquals(2, processedFlights.size());
+        assertEquals(flights.get(0), processedFlights.get(0));
+        assertEquals(flights.get(1), processedFlights.get(1));
     }
 
-    private void setUpFlightList(int i) {
-        for (int j = 0; j < i; j++) {
-            flights.add(createFlight((long) j));
-        }
+    @Test
+    public void shouldReturnOneFlightWithEqualOnlyDestination() throws Exception {
+        flights.add(createFlightFrom("source1234", "destination", "2016-01-02 15:45", "2016-01-02 16:20"));
+        flights.add(createFlightFrom("source4567", "destination2", "2016-01-02 09:30", "2016-01-02 15:50"));
+        flights.add(createFlightFrom("source7890", "destination3", "2017-09-09 00:30", "2017-09-09 05:30"));
+        ReservationInfo reservationInfo = createReservationFrom(null, "destination", null, null);
+
+        List<Flight> processedFlights = flightProcessor.findWantedFlights(flights, reservationInfo);
+
+        assertEquals(1, processedFlights.size());
+        assertEquals(flights.get(0), processedFlights.get(0));
+    }
+
+    @Test
+    public void shouldReturnTwoFlightsWithEqualSourceAndDestination() throws Exception {
+        flights.add(createFlightFrom("source1234", "destination", "2016-01-02 15:45", "2016-01-02 16:20"));
+        flights.add(createFlightFrom("source1234", "destination", "2016-01-02 09:30", "2016-01-02 15:50"));
+        flights.add(createFlightFrom("source7890", "destination3", "2017-09-09 00:30", "2017-09-09 05:30"));
+        ReservationInfo reservationInfo = createReservationFrom("source1234", "destination", null, null);
+
+        List<Flight> processedFlights = flightProcessor.findWantedFlights(flights, reservationInfo);
+
+        assertEquals(2, processedFlights.size());
+        assertEquals(flights.get(0), processedFlights.get(0));
+        assertEquals(flights.get(1), processedFlights.get(1));
+    }
+
+    @Test
+    public void shouldReturnFlightWithEqualDeparture() throws Exception {
+        flights.add(createFlightFrom("source1234", "destination", "2016-01-02 15:45", "2016-01-02 16:20"));
+        flights.add(createFlightFrom("source7890", "destination3", "2017-09-09 00:30", "2017-09-09 05:30"));
+        ReservationInfo reservationInfo = createReservationFrom(null, null, "2016-01-02", null);
+
+        List<Flight> processedFlights = flightProcessor.findWantedFlights(flights, reservationInfo);
+
+        assertEquals(1, processedFlights.size());
+        assertEquals(flights.get(0), processedFlights.get(0));
+    }
+
+    @Test
+    public void shouldReturnFlightWithEqualArrival() throws Exception {
+        flights.add(createFlightFrom("source1234", "destination", "2016-01-02 15:45", "2016-01-02 16:20"));
+        flights.add(createFlightFrom("source7890", "destination3", "2017-09-09 00:30", "2017-09-09 05:30"));
+        ReservationInfo reservationInfo = createReservationFrom(null, null, null, "2017-09-09");
+
+        List<Flight> processedFlights = flightProcessor.findWantedFlights(flights, reservationInfo);
+
+        assertEquals(1, processedFlights.size());
+        assertEquals(flights.get(1), processedFlights.get(0));
+    }
+
+    @Test
+    public void shouldReturnTwoFlightsWithEqualDepartureAndArrival() throws Exception {
+        flights.add(createFlightFrom("source1234", "destination1", "2016-01-02 15:45", "2016-01-02 16:20"));
+        flights.add(createFlightFrom("source4567", "destination2", "2016-01-02 09:30", "2016-01-02 15:50"));
+        flights.add(createFlightFrom("source7890", "destination3", "2017-09-09 00:30", "2017-09-09 05:30"));
+
+        ReservationInfo reservationInfo = createReservationFrom(null, null, "2016-01-02", "2016-01-02");
+
+        List<Flight> processedFlights = flightProcessor.findWantedFlights(flights, reservationInfo);
+
+        assertEquals(2, processedFlights.size());
+        assertEquals(flights.get(0), processedFlights.get(0));
+        assertEquals(flights.get(1), processedFlights.get(1));
+    }
+
+    private ReservationInfo createReservationFrom(String source, String destination, String departure, String arrival) {
+        ReservationInfo reservationInfo = new ReservationInfo();
+
+        reservationInfo.setSource(source);
+        reservationInfo.setDestination(destination);
+        reservationInfo.setDeparture(departure);
+        reservationInfo.setArrival(arrival);
+
+        return reservationInfo;
+    }
+
+    private Flight createFlightFrom(String source, String destination, String departure, String arrival) {
+        Flight flight = new Flight();
+
+        flight.setSource(source);
+        flight.setDestination(destination);
+        flight.setDeparture(departure);
+        flight.setArrival(arrival);
+
+        return flight;
     }
 
     private Flight createFlight(long i) {
