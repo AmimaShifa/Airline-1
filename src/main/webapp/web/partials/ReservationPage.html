@@ -43,10 +43,10 @@
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
-                            <input ng-model="departureDate" type="text"
-                                   datepicker-popup="yyyy-MM-dd" datepickerOptions="dateOptions"
-                                   is-open="false" ng-click="data.isOpen = true"
-                                   class="validate form-control" READONLY required>
+                            <input class="form-control" datepicker-popup="{{calendar.dateFormat}}"
+                                   ng-model="record.departure" is-open="calendar.opened.departure"
+                                   ng-click="calendar.open($event, 'departure')"
+                            />
                         </div>
                     </div>
                 </fieldset>
@@ -55,16 +55,16 @@
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
-                            <input ng-model="arrivalDate" type="text" value="arrivalDate"
-                                   datepicker-popup="yyyy-MM-dd" is-open="false"
-                                   ng-click="data.isOpen = true" class="validate form-control"
-                                   READONLY required>
+                            <input class="form-control" datepicker-popup="{{calendar.dateFormat}}"
+                                   ng-model="record.arrival" is-open="calendar.opened.arrival"
+                                   ng-click="calendar.open($event, 'arrival')"
+                            />
                         </div>
                     </div>
                 </fieldset>
                 <hr>
                 <fieldset>
-                    <label class="col-sm-{{labelColumnSize}} control-label">< 2 years</label>
+                    <label class="col-sm-3 control-label">< 2 years</label>
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
@@ -139,7 +139,7 @@
                 </fieldset>
                 <input type="submit" ng-style="reservationSubmit" class="styled-button-8" value="Submit"
                        ng-disabled="form-horizontal.$invalid"
-                       ng-click="getFlights(flight.source,flight.destination,arrivalDate,departureDate)"
+                       ng-click="getFlights(flight.source,flight.destination,record.arrival,record.departure)"
                 />
             </form>
         </div>

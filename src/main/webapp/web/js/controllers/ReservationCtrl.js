@@ -16,6 +16,17 @@ app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', 
         });
     };
 
+    $scope.calendar = {
+        opened: {},
+        dateFormat: 'yyyy-MM-dd',
+        open: function($event, which) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.calendar.opened[which] = true;
+        }
+    };
+
+
     var flightControllerScope = $scope.$new();
     $controller('FlightCtrl', {$scope: flightControllerScope});
     $scope.getFlights = function (source, destination, arrival, departure) {
@@ -102,8 +113,6 @@ app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', 
     };
 
     (function () {
-        $scope.departureDate = $filter('date')(new Date(), 'yyyy-MM-dd');
-        $scope.arrivalDate = $filter('date')(new Date(new Date().getTime() + (3 * 60 * 60 * 24 * 1000)), 'yyyy-MM-dd');
         $scope.controllerName = 'ReservationCtrl';
         $scope.labelColumnSize = 3;
         $scope.selectColumnSize = 3;
