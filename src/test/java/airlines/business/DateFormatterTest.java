@@ -1,6 +1,7 @@
-package airlines.business.date;
+package airlines.business;
 
 
+import airlines.model.Flight;
 import org.junit.Test;
 
 import java.time.LocalDate;
