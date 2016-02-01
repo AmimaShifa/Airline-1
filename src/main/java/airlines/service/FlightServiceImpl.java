@@ -1,6 +1,5 @@
 package airlines.service;
 
-import airlines.business.DateFormatter;
 import airlines.business.FlightProcessor;
 import airlines.model.Flight;
 import airlines.model.ReservationInfo;
@@ -9,7 +8,6 @@ import org.apache.log4j.Logger;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -50,6 +48,7 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public Iterable<Flight> findAll(String source, String destination, String arrival, String departure) {
         ReservationInfo reservationInfo = new ReservationInfo(source, destination, departure, arrival);
+        reservationInfo.fixTimeZoneMissMatch(departure, arrival);
         List<Flight> paginatedFlights = flightProcessor.findWantedFlights((List<Flight>) flightRepository.findAll(), reservationInfo);
 
         return paginatedFlights;
