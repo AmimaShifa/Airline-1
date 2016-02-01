@@ -19,7 +19,7 @@ app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', 
     $scope.calendar = {
         opened: {},
         dateFormat: 'yyyy-MM-dd',
-        open: function($event, which) {
+        open: function ($event, which) {
             $event.preventDefault();
             $event.stopPropagation();
             $scope.calendar.opened[which] = true;
@@ -30,7 +30,6 @@ app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', 
     var flightControllerScope = $scope.$new();
     $controller('FlightCtrl', {$scope: flightControllerScope});
     $scope.getFlights = function (source, destination, arrival, departure) {
-
         flightControllerScope.getFlghtsUsingQueryParams(source, destination, arrival, departure);
         //TODO replace this with promises!!!!
         $timeout(function () {
@@ -72,7 +71,7 @@ app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', 
             $scope.labelColumnSize = 3;
             $scope.selectColumnSize = 3;
             $scope.reservationContainerStyle = {};
-            $scope.reservationResultStyle = {};
+            $scope.reservationResultFlightListStyle = {};
             $scope.formHorizontalStyle = {};
             $scope.containerStyle = {};
             $scope.containerStyle = {
@@ -91,14 +90,15 @@ app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', 
                 display: 'inline-flex'
             };
 
-            $scope.reservationResultStyle = {
+            $scope.reservationResultFlightListStyle = {
+                position: "absolute",
                 padding: "0%",
                 margin: "0 auto",
                 'max-width': "200px"
             };
 
             $scope.formHorizontalStyle = {
-                'min-width': "300"
+                'min-width': "320px"
             };
 
             $scope.containerStyle = {

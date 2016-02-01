@@ -169,3 +169,12 @@ hr {
     width: 70%;
     margin-left: 50px;
 }
+
+.reservationResultTitle {
+    font-size: 2em;
+    color: #005faf;
+    font-family: Arial, sans-serif;
+    padding-top: 20px;
+    margin-left: 130px;
+}
+

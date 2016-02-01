@@ -64,7 +64,7 @@
                 </fieldset>
                 <hr>
                 <fieldset>
-                    <label class="col-sm-3 control-label">< 2 years</label>
+                    <label class="col-sm-{{labelColumnSize}} control-label"> < 2 years</label>
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
@@ -143,8 +143,13 @@
                 />
             </form>
         </div>
-        <div class="reservationResult" ng-style="reservationResultStyle">
-            <flights-table></flights-table>
+        <div class="reservationResult">
+            <div class="reservationResultTitle" ng-if="controllerName == 'ReservationCtrl' && flights.length > 0">
+                <p>Znalezione loty &nbsp;{{flight.source}} --> {{flight.destination}}</p>
+            </div>
+            <div class="reservationResultFlightList" ng-style="reservationResultFlightListStyle">
+                <flights-table></flights-table>
+            </div>
         </div>
     </div>
 </div>
