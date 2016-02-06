@@ -58,44 +58,44 @@
                 </fieldset>
                 <hr>
                 <fieldset>
-                    <label class="col-sm-{{labelColumnSize}} control-label"> < 2 years</label>
+                    <label class="col-sm-{{labelColumnSize}} control-label">Baby < 4 years old</label>
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
-                            <select class="validate form-control" ng-model="passengers[0]" required
+                            <select class="validate form-control" ng-model="passengers[0].value" required
                                     ng-options="option as option for option in passengersOptions">
                             </select>
                         </div>
                     </div>
                 </fieldset>
                 <fieldset>
-                    <label class="col-sm-{{labelColumnSize}} control-label">2 - 18 years</label>
+                    <label class="col-sm-{{labelColumnSize}} control-label">Student</label>
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
-                            <select class="validate form-control" ng-model="passengers[1]" required
+                            <select class="validate form-control" ng-model="passengers[1].value" required
                                     ng-options="option as option for option in passengersOptions">
                             </select>
                         </div>
                     </div>
                 </fieldset>
                 <fieldset>
-                    <label class="col-sm-{{labelColumnSize}} control-label">18 - 60 years</label>
+                    <label class="col-sm-{{labelColumnSize}} control-label">Normal</label>
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
-                            <select class="validate form-control" ng-model="passengers[2]" required
+                            <select class="validate form-control" ng-model="passengers[2].value" required
                                     ng-options="option as option for option in passengersOptions">
                             </select>
                         </div>
                     </div>
                 </fieldset>
                 <fieldset>
-                    <label class="col-sm-{{labelColumnSize}} control-label">> 60 years</label>
+                    <label class="col-sm-{{labelColumnSize}} control-label">Senior > 60 years old)</label>
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
-                            <select class="validate form-control" ng-model="passengers[3]" required
+                            <select class="validate form-control" ng-model="passengers[3].value" required
                                     ng-options="option as option for option in passengersOptions">
                             </select>
                         </div>
@@ -107,8 +107,8 @@
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
-                            <select class="validate form-control" ng-model="flightClass[0].value" required
-                                    ng-options="class.value as class.value for class in flightClass">
+                            <select class="validate form-control" ng-model="flightClass" required
+                                    ng-options="class.value as class.value for class in flightClasses">
                             </select>
                         </div>
                     </div>
