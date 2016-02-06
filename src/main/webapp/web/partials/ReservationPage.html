@@ -8,18 +8,15 @@
                 <input type="button" class="styled-button-8" value="Return Ticket"
                        ng-click="setReturnFlight()"/>
             </div>
-            <form role="form" class="form-horizontal" ng-style="formHorizontalStyle">
+            <form role="form" class="form-horizontal" ng-style="formHorizontalStyle" novalidate>
                 <hr>
                 <fieldset>
                     <label class="col-sm-{{labelColumnSize}} control-label">Source:</label>
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
-                            <select ng-model="flight.source" class="validate form-control" ng-minlength='1'>
-                                <option>Kraków</option>
-                                <option>Warszawa</option>
-                                <option>Poznań</option>
-                                <option>Gdańsk</option>
+                            <select ng-model="flight.source" class="form-control" required
+                                    ng-options="source.value as source.name for source in sourceOptions">
                             </select>
                         </div>
                     </div>
@@ -29,11 +26,8 @@
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
-                            <select ng-model="flight.destination" class="validate form-control" required>
-                                <option>Oslo</option>
-                                <option>Londyn</option>
-                                <option>Paryż</option>
-                                <option>Berlin</option>
+                            <select ng-model="flight.destination" class="form-control" required
+                                    ng-options="destination.value as destination.name for destination in destinationOptions">
                             </select>
                         </div>
                     </div>
@@ -44,7 +38,7 @@
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
                             <input class="form-control" datepicker-popup="{{calendar.dateFormat}}"
-                                   ng-model="record.departure" is-open="calendar.opened.departure"
+                                   ng-model="flight.departure" is-open="calendar.opened.departure"
                                    ng-click="calendar.open($event, 'departure')"
                             />
                         </div>
@@ -56,7 +50,7 @@
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
                             <input class="form-control" datepicker-popup="{{calendar.dateFormat}}"
-                                   ng-model="record.arrival" is-open="calendar.opened.arrival"
+                                   ng-model="flight.arrival" is-open="calendar.opened.arrival"
                                    ng-click="calendar.open($event, 'arrival')"
                             />
                         </div>
@@ -68,12 +62,8 @@
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
-                            <select class="validate form-control" required>
-                                <option>0</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                            <select class="validate form-control" ng-model="passengers[0]" required
+                                    ng-options="option as option for option in passengersOptions">
                             </select>
                         </div>
                     </div>
@@ -83,12 +73,8 @@
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
-                            <select class="validate form-control">
-                                <option>0</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                            <select class="validate form-control" ng-model="passengers[1]" required
+                                    ng-options="option as option for option in passengersOptions">
                             </select>
                         </div>
                     </div>
@@ -98,12 +84,8 @@
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
-                            <select class="form-control">
-                                <option>0</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                            <select class="validate form-control" ng-model="passengers[2]" required
+                                    ng-options="option as option for option in passengersOptions">
                             </select>
                         </div>
                     </div>
@@ -113,12 +95,8 @@
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
-                            <select class="form-control">
-                                <option>0</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                            <select class="validate form-control" ng-model="passengers[3]" required
+                                    ng-options="option as option for option in passengersOptions">
                             </select>
                         </div>
                     </div>
@@ -129,17 +107,15 @@
 
                     <div class="form-group">
                         <div class="col-sm-{{selectColumnSize}}">
-                            <select class="form-control" ng-minlength='6'>
-                                <option>Economy class</option>
-                                <option>Premium Class</option>
-                                <option>Business</option>
+                            <select class="validate form-control" ng-model="flightClass[0].value" required
+                                    ng-options="class.value as class.value for class in flightClass">
                             </select>
                         </div>
                     </div>
                 </fieldset>
                 <input type="submit" ng-style="reservationSubmit" class="styled-button-8" value="Submit"
                        ng-disabled="form-horizontal.$invalid"
-                       ng-click="getFlights(flight.source,flight.destination,record.arrival,record.departure)"
+                       ng-click="getFlights(flight.source,flight.destination,flight.arrival,flight.departure)"
                 />
             </form>
         </div>
