@@ -7,11 +7,6 @@
         "name": "Make reservation",
         "withSubmenu": "false",
         "url": "partials/ReservationPage.html"
-      },
-      {
-        "name": "Hotels",
-        "withSubmenu": "false",
-        "url": "partials/AdministrationPage.html"
       }
     ]
   },
@@ -21,11 +16,6 @@
     "submenu": [
       {
         "name": "My reservation",
-        "withSubmenu": "false",
-        "url": "partials/AdministrationPage.html"
-      },
-      {
-        "name": "Flight Status",
         "withSubmenu": "false",
         "url": "partials/AdministrationPage.html"
       }
