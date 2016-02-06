@@ -16,8 +16,8 @@ public class ReservationInfo {
     }
 
     public ReservationInfo(String source, String destination, String departure, String arrival) {
-        this.arrival = arrival;
         this.source = source;
+        this.destination = destination;
         this.departure = departure;
         this.arrival = arrival;
     }
