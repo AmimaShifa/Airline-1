@@ -3,6 +3,7 @@ package airlines.model;
 import org.apache.log4j.Logger;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.HashMap;
 import java.util.List;
@@ -22,13 +23,15 @@ public class Reservation {
     @Column(name = "reservationId")
     private Long reservationId;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "reservation")
+    @NotNull
+    @OneToMany(targetEntity = Flight.class, mappedBy = "reservation", fetch = FetchType.EAGER)
     private List<Flight> flights;
 
-    @Column(name = "passengers", nullable = true)
+    @NotNull
+    @Column(name = "passengers", nullable = false)
     private HashMap<Integer, Integer> passengers;
 
-    @Column(name = "class", nullable = true)
+    @Column(name = "class", nullable = false)
     private String flightClass;
 
     public Reservation() {
@@ -48,13 +51,6 @@ public class Reservation {
 
     public void setFlights(List<Flight> flights) {
         this.flights = flights;
-    }
-
-    public void addFlight(Flight flight) {
-        if (flights.contains(flight))
-            LOGGER.error("Reservation already has this flight ! : " + flight);
-        else
-            flights.add(flight);
     }
 
     public HashMap<Integer, Integer> getPassengers() {
