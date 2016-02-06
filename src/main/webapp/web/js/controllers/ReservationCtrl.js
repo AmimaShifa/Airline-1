@@ -26,11 +26,44 @@ app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', 
         }
     };
 
+    $scope.sourceOptions = [
+        {name: 'Kraków', value: 'Kraków'},
+        {name: 'Warszawa', value: 'Warszawa'},
+        {name: 'Poznań', value: 'Poznań'},
+        {name: 'Gdańsk', value: 'Gdańsk'}
+    ];
+
+    $scope.destinationOptions = [
+        {name: 'Oslo', value: 'Oslo'},
+        {name: 'Londyn', value: 'Londyn'},
+        {name: 'Paryż', value: 'Paryż'},
+        {name: 'Berlin', value: 'Berlin'}
+    ];
+    $scope.passengersOptions = [0, 1, 1, 3, 4];
+
+    $scope.passengers = [0, 0, 0, 0];
+
+    $scope.flightClass = [
+        {value: 'Economy class'},
+        {value: 'Premium class'},
+        {value: 'Business class'}
+    ];
+
+
+    $scope.flight = {
+        source: $scope.sourceOptions[0].value,
+        destination: $scope.destinationOptions[0].value
+    };
+
 
     var flightControllerScope = $scope.$new();
     $controller('FlightCtrl', {$scope: flightControllerScope});
     $scope.getFlights = function (source, destination, arrival, departure) {
-        flightControllerScope.getFlghtsUsingQueryParams(source, destination, arrival, departure);
+        if ($scope.isReturnFlight == false) {
+            flightControllerScope.getFlghtsUsingQueryParams(source, destination, null, departure);
+        } else {
+            flightControllerScope.getFlghtsUsingQueryParams(source, destination, arrival, departure);
+        }
         //TODO replace this with promises!!!!
         $timeout(function () {
             setProcessedFlights();
@@ -67,6 +100,7 @@ app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', 
 
     var setProcessedFlights = function () {
         $scope.flights = flightControllerScope.flights;
+
         if ($scope.flights.length == 0) {
             $scope.labelColumnSize = 3;
             $scope.selectColumnSize = 3;
