@@ -4,16 +4,43 @@
 app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', '$timeout', function ($scope, $http, $filter, $controller, $timeout) {
 
     /////////////CRUD FUNCTIONS////////////////////////
-    $scope.addReservation = function (fl) {
+    $scope.addReservation = function (reservation) {
+        console.log('reservation: ', reservation);
         $http({
             method: 'POST',
             url: '/airlines/reservations',
-            data: {}
+            data: {
+                "flights": reservation.flights,
+                "passengers": reservation.passengers,
+                "class": reservation.class
+            }
         }).then(function successCallback(response) {
             console.log("Reserwacja udana");
         }, function errorCallback() {
             console.log("Reserwacja nieudana! ");
         });
+    };
+
+
+    $scope.reservedFlight = [];
+    $scope.chooseFlight = function (flight) {
+        if (confirm('Are you sure you want to reserve this flight?' +
+                '\nsource : ' + flight.source +
+                '\ndestination : ' + flight.destination +
+                '\ndeparture : ' + flight.arrival +
+                '\narrival : ' + flight.arrival + '')) {
+
+            $scope.reservedFlight.splice(0, 0, flight);
+            $scope.resevation = {
+                flights: $scope.reservedFlight,
+                passengers: $scope.passengers,
+                class: $scope.flightClass
+            };
+
+            $scope.addReservation($scope.resevation);
+        } else {
+            console.log("DUPA");
+        }
     };
 
     $scope.calendar = {
@@ -39,16 +66,22 @@ app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', 
         {name: 'Paryż', value: 'Paryż'},
         {name: 'Berlin', value: 'Berlin'}
     ];
-    $scope.passengersOptions = [0, 1, 1, 3, 4];
 
-    $scope.passengers = [0, 0, 0, 0];
+    $scope.passengersOptions = [0, 1, 2, 3, 4];
 
-    $scope.flightClass = [
+    $scope.passengers = [
+        {name: 'BABY', value: 0},
+        {name: 'STUDENT', value: 0},
+        {name: 'NORMAL', value: 0},
+        {name: 'SENIOR', value: 0}
+    ];
+
+
+    $scope.flightClasses = [
         {value: 'Economy class'},
         {value: 'Premium class'},
         {value: 'Business class'}
     ];
-
 
     $scope.flight = {
         source: $scope.sourceOptions[0].value,
@@ -76,26 +109,6 @@ app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', 
 
     $scope.setReturnFlight = function () {
         $scope.isReturnFlight = true;
-    };
-
-    $scope.chooseFlight = function (flight) {
-        if (confirm('Are you sure you want to reserve this flight?' +
-                '\nsource : ' + flight.source +
-                '\ndestination : ' + flight.destination +
-                '\ndeparture : ' + flight.arrival +
-                '\narrival : ' + flight.arrival + '')) {
-            $scope.addReservation(flight);
-        } else {
-            console.log("DUPA");
-        }
-    };
-
-    $scope.hoverIn = function () {
-        $scope.hoverReservationButton = true;
-    };
-
-    $scope.hoverOut = function () {
-        $scope.hoverReservationButton = false;
     };
 
     var setProcessedFlights = function () {
@@ -132,7 +145,7 @@ app.controller('ReservationCtrl', ['$scope', '$http', '$filter', '$controller', 
             };
 
             $scope.formHorizontalStyle = {
-                'min-width': "320px"
+                'min-width': "390px"
             };
 
             $scope.containerStyle = {

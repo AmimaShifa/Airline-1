@@ -4,6 +4,7 @@ import airlines.model.Reservation;
 import airlines.service.ReservationService;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -65,6 +66,18 @@ public class ReservationRestService {
         }
 
     }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createReservation(Reservation reservation) {
+        try {
+            reservationService.save(reservation);
+            return Response.status(200).entity("reservation created").build();
+        } catch (DataIntegrityViolationException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity("such reservation already exists").build();
+        }
+    }
+
 
     public void setReservationService(ReservationService reservationService) {
         this.reservationService = reservationService;
