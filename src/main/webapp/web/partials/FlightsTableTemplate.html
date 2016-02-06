@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
+<table class="table table-striped table-hover">
     <thead ng-if="flights.length > 0">
     <tr>
         <th ng-if="controllerName == FlightCtrl">
@@ -58,7 +58,7 @@
     </td>
     <td ng-if="controllerName == 'ReservationCtrl'">
         <input type="button" class="styled-button-8" value="Reserve" style="padding: 5px; margin: 0 auto;"
-               ng-show="hoverReservationButton" ng-click="chooseFlight(flight)"
+               ng-click="chooseFlight(flight)"
         />
     </td>
     </tbody>
