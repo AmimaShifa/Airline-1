@@ -2,12 +2,16 @@ package airlines.init;
 
 import airlines.model.Client;
 import airlines.model.Flight;
+import airlines.model.Reservation;
 import airlines.rest.ClientRestService;
 import airlines.rest.FlightRestService;
+import airlines.rest.ReservationRestService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Created by winio_000 on 2016-01-06.
@@ -22,11 +26,24 @@ public class DefaultModelInitializer {
     @Inject
     private FlightRestService flightRestService;
 
+    @Inject
+    private ReservationRestService reservationRestService;
+
     @PostConstruct
     private void postConstructDefaultModelsInstances() {
         addDefaultClientModel();
         addDefaultFlightModel();
-        // addDefaultReservationModel();
+        addDefaultReservationModel();
+    }
+
+    private void addDefaultReservationModel() {
+        Reservation reservation = new Reservation();
+
+        reservation.setFlightClass("Premium class");
+        reservation.setFlights(Arrays.asList(new Flight("aname", "2016-07-07", "2016-07-07", "Kraków", "Oslo", 100.99, 100)));
+        reservation.setPassengers(new HashMap<>(new Integer(1), new Integer(2)));
+
+        reservationRestService.createReservation(reservation);
     }
 
     private void addDefaultClientModel() {
