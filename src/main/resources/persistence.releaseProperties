@@ -1,0 +1,6 @@
+db.url=jdbc:postgresql://localhost:5432/airlines
+db.dbName=airlines
+db.driver=org.postgresql.Driver
+db.userName=postgres
+db.password=postgres
+db.tcpServer=-tcpAllowOthers
