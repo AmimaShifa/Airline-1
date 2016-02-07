@@ -1,11 +1,8 @@
 package airlines.configuration;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcOperations;
@@ -18,33 +15,29 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
- * Created by winio_000 on 2015-12-13.
+ * Created by winio_000 on 2016-02-07.
  */
-
 @Configuration
-@PropertySources({@PropertySource(value = "classpath:persistence.properties")})
 @EnableJpaRepositories(basePackages = "airlines")
-public class DatabaseConfiguration {
-    private static Logger logger = Logger.getLogger(DatabaseConfiguration.class);
+public abstract class DatabaseConfiguration {
 
     @Value("${db.url}")
-    private String url;
+    protected String url;
 
     @Value("${db.dbName}")
-    private String dbName;
+    protected String dbName;
 
     @Value("${db.driver}")
-    private String driver;
+    protected String driver;
 
     @Value("${db.userName}")
-    private String userName;
+    protected String userName;
 
     @Value("${db.password}")
-    private String password;
+    protected String password;
 
     @Value("${db.tcpServer}")
-    private String tcpServer;
-
+    protected String tcpServer;
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -58,40 +51,17 @@ public class DatabaseConfiguration {
         return em;
     }
 
-
-    @Bean(destroyMethod = "close")
-    public DataSource dataSource() {
-        org.apache.tomcat.jdbc.pool.DataSource ds = new org.apache.tomcat.jdbc.pool.DataSource();
-        ds.setDriverClassName(driver);
-        ds.setUrl(url + "/" + dbName);
-        ds.setUsername(userName);
-        ds.setPassword(password);
-        ds.setInitialSize(5);
-        ds.setMaxActive(10);
-        ds.setMaxIdle(5);
-        ds.setMinIdle(2);
-
-        return ds;
-    }
-
     @Bean
-    public JdbcOperations tpl() {
+    protected JdbcOperations tpl() {
         return new JdbcTemplate(dataSource());
     }
 
     @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+    protected PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
-    Properties additionalJpaProperties() {
-        Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-        properties.setProperty("current_session_context_class", "thread");
+    public abstract Properties additionalJpaProperties();
 
-        return properties;
-    }
-
-
+    public abstract DataSource dataSource();
 }
